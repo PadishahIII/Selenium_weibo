@@ -7,7 +7,7 @@ https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?current_p
 GET /p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=1&since_id=4762965007931076&page=1&pagebar=0&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=165252871990
 
 GET /p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=2&since_id=4759948456364531&page=1&pagebar=1&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=1652528735239
-
+since_id变化：3016551566545
 下一页：
 GET /p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?pids=Pl_Core_MixedFeed__262&current_page=3&since_id=4757152821938552&page=2&ajaxpagelet=1&ajaxpagelet_v6=1&__ref=%2Fp%2F100808ec2f8f02483cbf2206505d27f9ffb3c1%2Fsuper_index%3Fcurrent_page%3D12%26since_id%3D4635626404844202%26page%3D1%23Pl_Core_MixedFeed__262&_t=FM_165252921938915
 
@@ -15,6 +15,16 @@ GET /p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?pids=Pl_Core_MixedFeed
 GET /p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=4&since_id=4752831007428148&page=2&pagebar=0&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=2&domain_op=100808&__rnd=1652532498674
 
 GET /p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=5&since_id=4746902824291712&page=2&pagebar=1&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=2&domain_op=100808&__rnd=1652532537003
+since_id变化:6xxx
+
+第三页since_id:4738962205704901
+翻页：4717107177326771  4685093509009862
+变化:32xxx
+
+第四页：4672266326250048
+4653043209995714   4646109873442974
+
+
 
 需要改变current_page,since_id,page
 since_id标识要申请资源的位置，可能是字节数
