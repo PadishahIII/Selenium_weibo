@@ -1,10 +1,22 @@
 第一次访问的url:
-https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?current_page=12&since_id=4635626404844202&page=1
+https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?current_page=6&since_id=4738962205704901&page=1
 
 需要翻页时：
-/p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=2&since_id=4759948456364531&page=1&pagebar=1&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=1652528312609
-
-/p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=2&since_id=4759948456364531&page=1&pagebar=1&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=1652528510972  
-
 两次翻页只有__rnd不同
-__rnd:随时间递增
+
+GET /p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=1&since_id=4762965007931076&page=1&pagebar=0&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=165252871990
+
+GET /p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=2&since_id=4759948456364531&page=1&pagebar=1&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=1652528735239
+
+下一页：
+GET /p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?pids=Pl_Core_MixedFeed__262&current_page=3&since_id=4757152821938552&page=2&ajaxpagelet=1&ajaxpagelet_v6=1&__ref=%2Fp%2F100808ec2f8f02483cbf2206505d27f9ffb3c1%2Fsuper_index%3Fcurrent_page%3D12%26since_id%3D4635626404844202%26page%3D1%23Pl_Core_MixedFeed__262&_t=FM_165252921938915
+
+翻页：
+GET /p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=4&since_id=4752831007428148&page=2&pagebar=0&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=2&domain_op=100808&__rnd=1652532498674
+
+GET /p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=5&since_id=4746902824291712&page=2&pagebar=1&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=2&domain_op=100808&__rnd=1652532537003
+
+需要改变current_page,since_id,page
+since_id标识要申请资源的位置，可能是字节数
+主要由since_id决定
+since_id是递减的
