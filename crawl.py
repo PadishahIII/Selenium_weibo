@@ -99,6 +99,7 @@ def getData(jsonstr):
     return datastr.replace(r"\/", "/")
 
 
+#提取所有页的链接
 def getUrlList(html):
     a_bf = BeautifulSoup(html, features="html.parser")
     a_list = a_bf.find_all("a")
@@ -138,6 +139,7 @@ def text_preprocess(html):
     return html_res
 
 
+#提取每个帖子的时间、昵称、正文 TODO:评论
 def getAllData(html):
     WB_detail_bf = BeautifulSoup(html, features="html.parser")
     WB_detail = WB_detail_bf.find_all("div", class_="WB_detail")
@@ -169,7 +171,7 @@ def getAllData(html):
     return nickname_list, date_list, text_list
 
 
-#获取所有帖子正文
+#获取所有帖子正文(只提取正文)
 def getText(html):
     div_bf = BeautifulSoup(html, features="html.parser")
     div = div_bf.find_all("div", class_="WB_text W_f14")
@@ -185,6 +187,9 @@ if __name__ == "__main__":
     #爬取网页
     UrlList = []
     res_doc, UrlList = scrapy(1)
+
+    #预处理及提取
+    out.write(res_doc)
     html_res = whole_preprocess(res_doc)
     nickname_list, date_list, text_list = getAllData(html_res)
 
@@ -197,28 +202,11 @@ if __name__ == "__main__":
         print(text_list[i], file=file)
         file.write("\n")
 
-    print(len(text_list))
+    print("帖子数：" + len(text_list))
 
-    print(len(UrlList))
+    print("页数：" + len(UrlList))
     for i in UrlList:
         print(i)
 
-    page = 2
-
-    #预处理及提取
-    html = str(res_doc)
-    out.write(html)
-    html_res = text_preprocess(html)
-    list = getText(html_res)
-
-    print(len(list))
-
-    index = 1
-    for i in list:
-        print(index, file=file)
-        index += 1
-        print(i, file=file)
-        print('\n', file=file)
     file.close()
     out.close()
-    #print(html_res)
