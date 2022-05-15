@@ -25,8 +25,6 @@ since_id变化:6xxx
 4653043209995714   4646109873442974
 
 
+提取<script的方法只能提取出正文,时间、昵称需要执行js脚本才能填充上
 
-需要改变current_page,since_id,page
-since_id标识要申请资源的位置，可能是字节数
-主要由since_id决定
-since_id是递减的
+
