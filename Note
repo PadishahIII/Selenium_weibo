@@ -28,3 +28,6 @@ since_id变化:6xxx
 提取<script的方法只能提取出正文,时间、昵称需要执行js脚本才能填充上
 
 
+TODO:滚动url:since_id都是一个值
+
+

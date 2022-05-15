@@ -34,59 +34,85 @@ def scrapy(page_index):
     res_doc = res_doc.decode('utf8', errors='replace')  #指定编码方式
     data += res_doc
 
+    #获取第一个滚动url
+    si_cp_tab = getSinceID(res_doc)
+    print(si_cp_tab)
+
     #翻页TODO:要先从翻页的事件中得到该页的所有url
-    def getWholePage(current_page_ini, page):
+    def getWholePage(current_page_ini, page, si_cp_tab):
         data = ''
         rnd = "1652528312609"  #递增
-        current_page = current_page_ini
-        since_id = ['4762965007931076',
-                    '4759948456364531']  #4762965007931076,4759948456364531
-        since_id_index = 0
+        #current_page = current_page_ini
+        #since_id = ['4762965007931076',
+        #            '4759948456364531']  #4762965007931076,4759948456364531
+        #since_id_index = 0
         cnt = 0
 
         file = open("raw.html", "w", encoding="utf8", errors='replace')
 
-        while (cnt < len(since_id)):
+        while (si_cp_tab != ''):
             pagebar = '1'
-            if (since_id_index == 0):
+            if (cnt == 0):
                 pagebar = '0'
-            target = "https://weibo.com/p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&current_page=" + str(
-                current_page
-            ) + "&since_id=" + since_id[since_id_index] + "&page=" + str(
+            target = "https://weibo.com/p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&" + si_cp_tab + "&page=" + str(
                 page
-            ) + "&pagebar=" + pagebar + "&tab=super_index&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=" + rnd
+            ) + "&pagebar=" + pagebar + "&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=" + rnd
             res = request.Request(target)
             res.add_header(
                 "Cookie",
                 "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; PC_TOKEN=cd12a7f8f3; ALF=1684120236; SSOLoginState=1652584238; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvXRRkvP0Egci3jorNLVmgEIoLZJiltCs6EotW9MTmb0g.; SUB=_2A25PhB9_DeThGeNJ7FYT8S_JwzSIHXVs8He3rDV8PUNbmtB-LXDVkW9NS7N3Vmp0gToiKS71-HWQ_dUptLT6cVtz; XSRF-TOKEN=HB3So32veWS4D1X56-gJBFRj; WBPSESS=TlDwwucyEECKkCVNMnOgDCUsjPrxBSPv6-c3l-ry9u9-ZHBNYYmN_TRFpR7XZq9r59DJ9EF331uu4nyZDIBNpTGjjXP40N2nSgJ0MQYH2u-R8Qk6FIHoFm-sDtzMZiOQpBLhkNOeys2IK_5tVKRSsQ==; _s_tentry=weibo.com; Apache=1363728247308.7576.1652584251532; ULV=1652584251724:4:4:1:1363728247308.7576.1652584251532:1652526029346; wb_view_log_5774211588=1536*8641.25; webim_unReadCount=%7B%22time%22%3A1652584560909%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A43%2C%22msgbox%22%3A0%7D"
             )
+            #发送请求 应答为json
             response = request.urlopen(res)
             print(response.getcode())  #状态码
             res_doc = response.read()
             res_doc = res_doc.decode('unicode_escape',
                                      errors='replace')  #指定编码方式
             res_doc = getData(res_doc)
-            if (since_id_index == 0):
-                print("len:" + str(len(res_doc)))  #131123
-                #print(int(since_id[0]) - int(since_id[1]))  #3016551566545
+
+            #在新的应答中提取下一次翻页的url
+            si_cp_tab = getSinceID(res_doc)
+            print(si_cp_tab)
 
             file.write(res_doc)
+            file.write(
+                "\n<!-- ******************************************************************************** -->\n"
+            )
 
             data += res_doc
             rnd = str(int(rnd) + 100000)
             cnt += 1
-            current_page += 1
-            since_id_index += 1
         file.close()
         return data
 
-    data_ = getWholePage(2, page_index)
+    data_ = getWholePage(2, page_index, si_cp_tab)
     data += data_
 
     #获取url列表
     if (page_index == 1):
         return data, getUrlList(data)
 
+    return data
+
+
+#获取滚动url的参数,html中只能包含一个url
+def getSinceID(html):
+    rst = re.compile(
+        r'<div class=.{0,3}WB_cardwrap S_bg2.{0,3} node-type=.{0,3}lazyload.{0,3} action-data=(.+?)>'
+    )
+    list = rst.findall(html)
+    if (len(list) > 0):
+        return list[0]
+    else:
+        return ''
+
+    div_bf = BeautifulSoup(html, features="html.parser")
+    div_list = div_bf.find_all("div", class_="WB_cardwrap S_bg2")
+    data = ''
+    if (len(div_list) > 0 and 'action-data' in div_list[0].attrs.keys()):
+        data = div_list[0].get(
+            'action-data'
+        )  #tab=super_index&current_page=2&since_id=4759948456364531
     return data
 
 
@@ -104,10 +130,13 @@ def getUrlList(html):
     a_bf = BeautifulSoup(html, features="html.parser")
     a_list = a_bf.find_all("a")
     url_list = set()
+    rst = re.compile(r'.*page=(\d+?).*')
     for a_obj in a_list:
         if (a_obj != NULL and 'bpfilter' in a_obj.attrs.keys()
                 and 'href' in a_obj.attrs.keys() and len(a_obj['href']) >= 30):
-            url_list.add(a_obj['href'].replace(r'\/', '/'))
+            href_str = a_obj['href'].replace(r'\/', '/')
+            page_num_list = rst.findall(href_str)  #TODO:把urlList做成map
+            url_list.add(href_str)
     return list(url_list)
 
 
@@ -202,9 +231,9 @@ if __name__ == "__main__":
         print(text_list[i], file=file)
         file.write("\n")
 
-    print("帖子数：" + len(text_list))
+    print("帖子数：" + str(len(text_list)))
 
-    print("页数：" + len(UrlList))
+    print("页数：" + str(len(UrlList)))
     for i in UrlList:
         print(i)
 
