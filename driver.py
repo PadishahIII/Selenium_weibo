@@ -1,3 +1,5 @@
+from types import NoneType
+from bs4 import BeautifulSoup
 from pymysql import NULL
 import selenium
 from selenium import webdriver
@@ -22,6 +24,20 @@ def getDictCookie(str):
     return cookie_list
 
 
+def getNextPage(html):
+    loc = html.find("下一页")
+    html = html[loc - 600:loc + 100]
+    print(html)
+    html = re.sub("\s", "", html, 0)
+    rst = re.compile("<a.*?href=\"(\S+?)\"[^<]*?>下一页</a>")
+    href = rst.findall(html)
+    rst = re.compile("http[s]?://\S+(/\S+?)*")
+    if (href == NULL or len(href) == 0
+            or type(rst.match(href[0])) == NoneType):
+        return ''
+    return href[0]
+
+
 def scrapy(cookie_str):
     driver = webdriver.Edge()
     file = open("log", "w", errors="replace")
@@ -34,19 +50,29 @@ def scrapy(cookie_str):
     driver.refresh()
 
     driver.maximize_window()
-    next_page = NULL
-    while (next_page == NULL):  #滚动若干次
+    #next_page = NULL
+    #next_page_link = re.compile(r"")
+    for i in range(5):  #滚动若干次
         js = "window.scrollTo(0,document.body.scrollHeight);"
         driver.execute_script(js)
         time.sleep(2)
-        try:
-            next_page = driver.find_element(by=By.CLASS_NAME,
-                                            value='page next S_txt1 S_line1')
-        except selenium.common.exceptions.NoSuchElementException as e:
-            continue
+        #try:
+        #    #next_page = driver.find_element(by=By.CLASS_NAME,
+        #    #                                value='page next S_txt1 S_line1')
+        #    next_page = driver.find_element_by_class_name(
+        #        'page next S_txt1 S_line1')
+        #except selenium.common.exceptions.NoSuchElementException as e:
+        #    continue
     html = driver.page_source
     file.write(html)
-    next_page.click()
+    next_page_url = getNextPage(html)
+    if (next_page_url != ''):
+        js = "let atag  = document.createElement('a');atag.href='{0}';atag.click();".format(
+            next_page_url)
+        driver.execute_script(js)
+    else:
+        print("none nextUrl")
+    #next_page.click()
     time.sleep(9999)
 
 
