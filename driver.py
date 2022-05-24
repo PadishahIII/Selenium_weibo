@@ -50,29 +50,22 @@ def scrapy(cookie_str):
     driver.refresh()
 
     driver.maximize_window()
-    #next_page = NULL
-    #next_page_link = re.compile(r"")
-    for i in range(5):  #滚动若干次
-        js = "window.scrollTo(0,document.body.scrollHeight);"
-        driver.execute_script(js)
-        time.sleep(2)
-        #try:
-        #    #next_page = driver.find_element(by=By.CLASS_NAME,
-        #    #                                value='page next S_txt1 S_line1')
-        #    next_page = driver.find_element_by_class_name(
-        #        'page next S_txt1 S_line1')
-        #except selenium.common.exceptions.NoSuchElementException as e:
-        #    continue
-    html = driver.page_source
-    file.write(html)
-    next_page_url = getNextPage(html)
-    if (next_page_url != ''):
-        js = "let atag  = document.createElement('a');atag.href='{0}';atag.click();".format(
-            next_page_url)
-        driver.execute_script(js)
-    else:
-        print("none nextUrl")
-    #next_page.click()
+
+    while (True):
+        for i in range(5):  #滚动若干次
+            js = "window.scrollTo(0,document.body.scrollHeight);"
+            driver.execute_script(js)
+            time.sleep(2)
+
+        html = driver.page_source
+        file.write(html)
+
+        next_page_btn = driver.find_element_by_link_text('下一页')
+        if (next_page_btn != NULL and next_page_btn != NoneType):
+            next_page_btn.click()
+        else:
+            break
+
     time.sleep(9999)
 
 
@@ -80,5 +73,5 @@ if __name__ == '__main__':
     #str = "SINAGLOBAL=2012260830470.789.1652279835753; SSOLoginState=1652584238; XSRF-TOKEN=HB3So32veWS4D1X56-gJBFRj; _s_tentry=weibo.com; Apache=1363728247308.7576.1652584251532; ULV=1652584251724:4:4:1:1363728247308.7576.1652584251532:1652526029346; PC_TOKEN=21f4d2caee; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; ALF=1684769000; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvrjXUMBPo1gmYeyouta8PyTPbt9JdTzK3SuOWOeqzels.; SUB=_2A25PjiU6DeThGeNJ7FYT8S_JwzSIHXVs-hHyrDV8PUNbmtANLUTAkW9NS7N3VnPuWs1ATF_0jrxtW2wwTO7MY0hL; wb_view_log_5774211588=1536*8641.25; webim_unReadCount=%7B%22time%22%3A1653233010269%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A44%2C%22msgbox%22%3A0%7D"
     #Dict = getDictCookie(str)
     #print(Dict)
-    cookie_str = "SINAGLOBAL=2012260830470.789.1652279835753; SSOLoginState=1652584238; XSRF-TOKEN=HB3So32veWS4D1X56-gJBFRj; _s_tentry=weibo.com; Apache=1363728247308.7576.1652584251532; ULV=1652584251724:4:4:1:1363728247308.7576.1652584251532:1652526029346; PC_TOKEN=21f4d2caee; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; ALF=1684769000; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvrjXUMBPo1gmYeyouta8PyTPbt9JdTzK3SuOWOeqzels.; SUB=_2A25PjiU6DeThGeNJ7FYT8S_JwzSIHXVs-hHyrDV8PUNbmtANLUTAkW9NS7N3VnPuWs1ATF_0jrxtW2wwTO7MY0hL; wb_view_log_5774211588=1536*8641.25; webim_unReadCount=%7B%22time%22%3A1653233010269%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A44%2C%22msgbox%22%3A0%7D"
+    cookie_str = "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; webim_unReadCount=%7B%22time%22%3A1653323934983%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A41%2C%22msgbox%22%3A0%7D; PC_TOKEN=40a9a3a8e1; ALF=1684921934; SSOLoginState=1653385937; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvl0BlyU53MMV1Cc_p5M_sHLA8zHJlVl3qGGewPqoj6M4.; SUB=_2A25PiNqBDeThGeNJ7FYT8S_JwzSIHXVs_EtJrDV8PUNbmtB-LUrzkW9NS7N3Vholte-i4RmbiaLABOALFbG5sXjb; _s_tentry=weibo.com; Apache=7945095029938.9.1653385986988; ULV=1653385987133:6:6:2:7945095029938.9.1653385986988:1653316943984"
     scrapy(cookie_str)

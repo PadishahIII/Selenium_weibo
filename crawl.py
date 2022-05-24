@@ -2,12 +2,65 @@ from email.policy import strict
 import json
 from pickletools import long4
 import re
+from selenium import webdriver
 from bs4 import BeautifulSoup
 import urllib.request as request
 import json
 from matplotlib.font_manager import json_dump
-
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from pymysql import NULL
+import time
+from types import NoneType
+
+
+def scrapy_(cookie_str):
+    file = open("test", "w", encoding="utf8", errors='replace')
+
+    driver = webdriver.Edge()
+    target_first = "https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?sudaref=weibo.com"
+    driver.get(target_first)
+    cookie_list = getDictCookie(cookie_str)
+    for cookie in cookie_list:
+        driver.add_cookie(cookie)
+    driver.get(target_first)
+    driver.refresh()
+
+    driver.maximize_window()
+
+    page_num = 1
+    while (page_num <= 1):
+        for i in range(5):  #滚动若干次
+            js = "window.scrollTo(0,document.body.scrollHeight);"
+            driver.execute_script(js)
+            time.sleep(2)
+
+        html = driver.page_source
+        nickname_list, date_list, text_list = getAllData(html)
+
+        file.write("\n\n*******************  PAGE:" + str(page_num) +
+                   " *****************************\n\n")
+        file.write("帖子数：" + str(len(text_list)) + "\n")
+
+        for i in range(0, len(nickname_list)):
+            file.write(str(i) + ".  " + date_list[i] + "\n")
+            file.write(nickname_list[i] + ":" + text_list[i] + "\n")
+            file.write("\n")
+        for i in range(len(nickname_list), len(text_list)):
+            print(i, file=file)
+            print(text_list[i], file=file)
+            file.write("\n")
+
+        next_page_btn = driver.find_element_by_link_text('下一页')
+        if (next_page_btn != NULL and next_page_btn != NoneType):
+            next_page_btn.click()
+            time.sleep(2)
+            page_num += 1
+        else:
+            break
+
+    file.close()
+    return
 
 
 #获取一整页的内容
@@ -95,52 +148,38 @@ def scrapy(page_index):
     return data
 
 
-#获取滚动url的参数,html中只能包含一个url
-def getSinceID(html):
-    rst = re.compile(
-        r'<div class=.{0,3}WB_cardwrap S_bg2.{0,3} node-type=.{0,3}lazyload.{0,3} action-data=(.+?)>'
-    )
-    list = rst.findall(html)
-    if (len(list) > 0):
-        return list[0]
-    else:
+#构造cookie的关联数组
+def getDictCookie(str):
+    cookie_list = list()
+    rst = re.compile(r"(.+?)\s*=\s*(.+?)\s*;")
+    res = rst.findall(str)
+    for i in res:
+        if (i[0] != '' and i[1] != ''):
+            cookie = dict()
+            cookie['name'] = i[0].replace(" ", "")
+            cookie['value'] = i[1].replace(" ", "")
+            cookie['domain'] = 'weibo.com'
+            cookie_list.append(cookie)
+
+    return cookie_list
+
+
+#(弃用)获取下一页的url
+def getNextPage(html):
+    loc = html.find("下一页")
+    html = html[loc - 600:loc + 100]
+    print(html)
+    html = re.sub("\s", "", html, 0)
+    rst = re.compile("<a.*?href=\"(\S+?)\"[^<]*?>下一页</a>")
+    href = rst.findall(html)
+    rst = re.compile("http[s]?://\S+(/\S+?)*")
+    if (href == NULL or len(href) == 0
+            or type(rst.match(href[0])) == NoneType):
         return ''
-
-    div_bf = BeautifulSoup(html, features="html.parser")
-    div_list = div_bf.find_all("div", class_="WB_cardwrap S_bg2")
-    data = ''
-    if (len(div_list) > 0 and 'action-data' in div_list[0].attrs.keys()):
-        data = div_list[0].get(
-            'action-data'
-        )  #tab=super_index&current_page=2&since_id=4759948456364531
-    return data
+    return href[0]
 
 
-#从json字符串中提取data字段
-def getData(jsonstr):
-    jsonlist = list(jsonstr)
-    index = jsonstr.find('"data":')
-    jsonlist[index + len('"data":')]
-    datastr = ''.join(jsonlist[index + len('"data":') + 1:len(jsonlist) - 2])
-    return datastr.replace(r"\/", "/")
-
-
-#提取所有页的链接
-def getUrlList(html):
-    a_bf = BeautifulSoup(html, features="html.parser")
-    a_list = a_bf.find_all("a")
-    url_list = set()
-    rst = re.compile(r'.*page=(\d+?).*')
-    for a_obj in a_list:
-        if (a_obj != NULL and 'bpfilter' in a_obj.attrs.keys()
-                and 'href' in a_obj.attrs.keys() and len(a_obj['href']) >= 30):
-            href_str = a_obj['href'].replace(r'\/', '/')
-            page_num_list = rst.findall(href_str)  #TODO:把urlList做成map
-            url_list.add(href_str)
-    return list(url_list)
-
-
-#对整页的html预处理
+#(弃用)对整页的html预处理
 def whole_preprocess(html):
     html_res = re.sub("<a.*?a>", '', html, 0)  #去掉链接
     #html_res = re.sub(r"\s", '', html_res, 0)  #去掉表情
@@ -176,6 +215,14 @@ def getAllData(html):
     date_list = []  #帖子的时间
     text_list = []  #正文
 
+    #预处理
+    def preprocess(html):
+        html_res = re.sub("<a.*?</a>", '', html, 0)  #去掉链接
+        html_res = html_res.replace("哈工大超话", '')
+        html_res = ''.join(x for x in html_res
+                           if x.isprintable())  #去除不可打印字符如\u200b
+        return html_res
+
     for i in WB_detail:
         WB_info_bf = BeautifulSoup(str(i))
 
@@ -195,7 +242,8 @@ def getAllData(html):
         if (len(a_date_list) > 0):
             date_list.append(a_date_list[0].get("title"))
         if (len(WB_text_W_f14_list) > 0):
-            text_list.append(WB_text_W_f14_list[0].text.replace(' ', ''))
+            text_list.append(
+                preprocess(WB_text_W_f14_list[0].text.replace(' ', '')))
 
     return nickname_list, date_list, text_list
 
@@ -213,29 +261,5 @@ def getText(html):
 if __name__ == "__main__":
     file = open("test", "w", encoding="utf8", errors='replace')
     out = open("res.html", "w", encoding="utf8", errors='replace')
-    #爬取网页
-    UrlList = []
-    res_doc, UrlList = scrapy(1)
-
-    #预处理及提取
-    out.write(res_doc)
-    html_res = whole_preprocess(res_doc)
-    nickname_list, date_list, text_list = getAllData(html_res)
-
-    for i in range(0, len(nickname_list)):
-        file.write(str(i) + ".  " + date_list[i] + "\n")
-        file.write(nickname_list[i] + ":" + text_list[i] + "\n")
-        file.write("\n")
-    for i in range(len(nickname_list), len(text_list)):
-        print(i, file=file)
-        print(text_list[i], file=file)
-        file.write("\n")
-
-    print("帖子数：" + str(len(text_list)))
-
-    print("页数：" + str(len(UrlList)))
-    for i in UrlList:
-        print(i)
-
-    file.close()
-    out.close()
+    cookie_str = "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; webim_unReadCount=%7B%22time%22%3A1653323934983%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A41%2C%22msgbox%22%3A0%7D; PC_TOKEN=40a9a3a8e1; ALF=1684921934; SSOLoginState=1653385937; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvl0BlyU53MMV1Cc_p5M_sHLA8zHJlVl3qGGewPqoj6M4.; SUB=_2A25PiNqBDeThGeNJ7FYT8S_JwzSIHXVs_EtJrDV8PUNbmtB-LUrzkW9NS7N3Vholte-i4RmbiaLABOALFbG5sXjb; _s_tentry=weibo.com; Apache=7945095029938.9.1653385986988; ULV=1653385987133:6:6:2:7945095029938.9.1653385986988:1653316943984"
+    scrapy_(cookie_str)
