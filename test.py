@@ -17,7 +17,9 @@ def getNextPage(html):
 
 
 #file = open("test.html", "r", errors="replace", encoding='utf8')
-#driver = webdriver.Edge()
+option = webdriver.EdgeOptions()
+option.add_argument("headless")
+driver = webdriver.Edge(options=option)
 #driver.get("http://localhost")
 #ele = driver.find_element_by_link_text("link")
 #print(ele)

@@ -1,7 +1,6 @@
-from email.policy import strict
 import json
-from pickletools import long4
 import re
+import selenium
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import urllib.request as request
@@ -11,14 +10,36 @@ from selenium.webdriver.common.by import By
 from pymysql import NULL
 import time
 from types import NoneType
+import pymysql
 
 
 def scrapy_(cookie_str):
     file = open("test", "w", encoding="utf8", errors='replace')
+    #数据库连接
+    conn = pymysql.connect(host='localhost',
+                           user='root',
+                           password='914075',
+                           db='WeiBo_HIT_DB',
+                           charset='utf8mb4')
+    cur = conn.cursor()
+    get_max_id_sql = "select max(id) from ChaohuaData;"
+    insert_sql = "insert into ChaohuaData (id,date,nickname,comment_num,favour_num,text)values({0},'{1}','{2}',{3},{4},'{5}');"
 
-    driver = webdriver.Edge()
+    def Insert(id, date, nickname, comment_num, favour_num, text):
+        res = cur.execute(
+            insert_sql.format(id, date, nickname, comment_num, favour_num,
+                              text))
+        conn.commit()
+        #log
+
+    #初始化WebDriver
+    option = webdriver.EdgeOptions()
+    option.add_argument("headless")
+    driver = webdriver.Edge(options=option)
+    #获取超话首页
     target_first = "https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?sudaref=weibo.com"
     driver.get(target_first)
+    #添加cookie(每天要通过burp更新)
     cookie_list = getDictCookie(cookie_str)
     for cookie in cookie_list:
         driver.add_cookie(cookie)
@@ -27,12 +48,23 @@ def scrapy_(cookie_str):
 
     driver.maximize_window()
 
+    cur.execute(get_max_id_sql)
+    id = cur.fetchone()[0] + 1
+    true_id = 1
     page_num = 1
-    while (page_num <= 1):
-        for i in range(5):  #滚动若干次
+    while (True):
+        for i in range(10):  #滚动若干次
             js = "window.scrollTo(0,document.body.scrollHeight);"
             driver.execute_script(js)
             time.sleep(2)
+            try:
+                page_btn = driver.find_elements_by_class_name('W_pages')
+                if (len(page_btn) <= 0):
+                    continue
+                else:
+                    break
+            except:
+                break
 
         for ele in driver.find_elements_by_partial_link_text("展开全文"):
             driver.execute_script("arguments[0].click();", ele)
@@ -49,7 +81,8 @@ def scrapy_(cookie_str):
             file.write(str(i) + ".  " + date_list[i] + "\n")
             file.write(nickname_list[i] + ":" + text_list[i] + "\n")
             file.write("评论数:" + statistic_list[i][0] + " 点赞数:" +
-                       statistic_list[i][1] + "\n")
+                       statistic_list[i][1])
+            file.write("id:" + str(true_id) + "\n")
             file.write("\n")
         for i in range(len(nickname_list), len(text_list)):
             print(i, file=file)
@@ -58,12 +91,29 @@ def scrapy_(cookie_str):
                        statistic_list[i][1] + "\n")
             file.write("\n")
 
-        next_page_btn = driver.find_element_by_link_text('下一页')
-        if (next_page_btn != NULL and next_page_btn != NoneType):
-            next_page_btn.click()
-            time.sleep(2)
-            page_num += 1
-        else:
+        for i in range(
+                0,
+                min(min(len(nickname_list), len(text_list)),
+                    len(statistic_list))):
+            if (true_id > id):
+                Insert(str(true_id), date_list[i], nickname_list[i],
+                       statistic_list[i][0], statistic_list[i][1],
+                       text_list[i])
+            true_id += 1
+        try:
+            next_page_btn = driver.find_element_by_link_text('下一页')
+            if (next_page_btn != NULL and next_page_btn != NoneType):
+                #next_page_btn.click()
+                driver.execute_script("arguments[0].click();", next_page_btn)
+                time.sleep(2)
+                page_num += 1
+            else:
+                break
+        except Exception as e:
+            print("Exception")
+            print(e)
+            print("id:" + str(true_id))
+            print("page:" + str(page_num))
             break
 
     file.close()
@@ -212,6 +262,6 @@ def getText(html):
 
 if __name__ == "__main__":
     file = open("test", "w", encoding="utf8", errors='replace')
-    out = open("res.html", "w", encoding="utf8", errors='replace')
+
     cookie_str = "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; webim_unReadCount=%7B%22time%22%3A1653323934983%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A41%2C%22msgbox%22%3A0%7D; PC_TOKEN=40a9a3a8e1; ALF=1684921934; SSOLoginState=1653385937; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvl0BlyU53MMV1Cc_p5M_sHLA8zHJlVl3qGGewPqoj6M4.; SUB=_2A25PiNqBDeThGeNJ7FYT8S_JwzSIHXVs_EtJrDV8PUNbmtB-LUrzkW9NS7N3Vholte-i4RmbiaLABOALFbG5sXjb; _s_tentry=weibo.com; Apache=7945095029938.9.1653385986988; ULV=1653385987133:6:6:2:7945095029938.9.1653385986988:1653316943984"
     scrapy_(cookie_str)
