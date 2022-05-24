@@ -6,7 +6,6 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import urllib.request as request
 import json
-from matplotlib.font_manager import json_dump
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from pymysql import NULL
@@ -35,8 +34,12 @@ def scrapy_(cookie_str):
             driver.execute_script(js)
             time.sleep(2)
 
+        for ele in driver.find_elements_by_partial_link_text("展开全文"):
+            driver.execute_script("arguments[0].click();", ele)
+            time.sleep(2)
+
         html = driver.page_source
-        nickname_list, date_list, text_list = getAllData(html)
+        nickname_list, date_list, text_list, statistic_list = getAllData(html)
 
         file.write("\n\n*******************  PAGE:" + str(page_num) +
                    " *****************************\n\n")
@@ -45,10 +48,14 @@ def scrapy_(cookie_str):
         for i in range(0, len(nickname_list)):
             file.write(str(i) + ".  " + date_list[i] + "\n")
             file.write(nickname_list[i] + ":" + text_list[i] + "\n")
+            file.write("评论数:" + statistic_list[i][0] + " 点赞数:" +
+                       statistic_list[i][1] + "\n")
             file.write("\n")
         for i in range(len(nickname_list), len(text_list)):
             print(i, file=file)
             print(text_list[i], file=file)
+            file.write("评论数:" + statistic_list[i][0] + " 点赞数:" +
+                       statistic_list[i][1] + "\n")
             file.write("\n")
 
         next_page_btn = driver.find_element_by_link_text('下一页')
@@ -61,91 +68,6 @@ def scrapy_(cookie_str):
 
     file.close()
     return
-
-
-#获取一整页的内容
-def scrapy(page_index):
-    data = ''
-    #第一页,获取url列表
-    if (page_index == 1):
-        target_first = "https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?current_page=6&since_id=4738962205704901&page=1"
-        target = target_first
-    else:
-        target = "https://weibo.com" + UrlList[page_index - 1]
-        #since_id = '4738962205704901'  #4738962205704901
-    #page = page_index
-    #current_page = 2
-
-    res = request.Request(target)
-    res.add_header(
-        "Cookie",
-        "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; PC_TOKEN=cd12a7f8f3; ALF=1684120236; SSOLoginState=1652584238; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvXRRkvP0Egci3jorNLVmgEIoLZJiltCs6EotW9MTmb0g.; SUB=_2A25PhB9_DeThGeNJ7FYT8S_JwzSIHXVs8He3rDV8PUNbmtB-LXDVkW9NS7N3Vmp0gToiKS71-HWQ_dUptLT6cVtz; XSRF-TOKEN=HB3So32veWS4D1X56-gJBFRj; WBPSESS=TlDwwucyEECKkCVNMnOgDCUsjPrxBSPv6-c3l-ry9u9-ZHBNYYmN_TRFpR7XZq9r59DJ9EF331uu4nyZDIBNpTGjjXP40N2nSgJ0MQYH2u-R8Qk6FIHoFm-sDtzMZiOQpBLhkNOeys2IK_5tVKRSsQ==; _s_tentry=weibo.com; Apache=1363728247308.7576.1652584251532; ULV=1652584251724:4:4:1:1363728247308.7576.1652584251532:1652526029346; wb_view_log_5774211588=1536*8641.25; webim_unReadCount=%7B%22time%22%3A1652584560909%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A43%2C%22msgbox%22%3A0%7D"
-    )
-    response = request.urlopen(res)
-    print(response.getcode())  #状态码
-    res_doc = response.read()
-    res_doc = res_doc.decode('utf8', errors='replace')  #指定编码方式
-    data += res_doc
-
-    #获取第一个滚动url
-    si_cp_tab = getSinceID(res_doc)
-    print(si_cp_tab)
-
-    #翻页TODO:要先从翻页的事件中得到该页的所有url
-    def getWholePage(current_page_ini, page, si_cp_tab):
-        data = ''
-        rnd = "1652528312609"  #递增
-        #current_page = current_page_ini
-        #since_id = ['4762965007931076',
-        #            '4759948456364531']  #4762965007931076,4759948456364531
-        #since_id_index = 0
-        cnt = 0
-
-        file = open("raw.html", "w", encoding="utf8", errors='replace')
-
-        while (si_cp_tab != ''):
-            pagebar = '1'
-            if (cnt == 0):
-                pagebar = '0'
-            target = "https://weibo.com/p/aj/v6/mblog/mbloglist?ajwvr=6&domain=100808&" + si_cp_tab + "&page=" + str(
-                page
-            ) + "&pagebar=" + pagebar + "&pl_name=Pl_Core_MixedFeed__262&id=100808ec2f8f02483cbf2206505d27f9ffb3c1&script_uri=/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index&feed_type=1&pre_page=1&domain_op=100808&__rnd=" + rnd
-            res = request.Request(target)
-            res.add_header(
-                "Cookie",
-                "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; PC_TOKEN=cd12a7f8f3; ALF=1684120236; SSOLoginState=1652584238; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvXRRkvP0Egci3jorNLVmgEIoLZJiltCs6EotW9MTmb0g.; SUB=_2A25PhB9_DeThGeNJ7FYT8S_JwzSIHXVs8He3rDV8PUNbmtB-LXDVkW9NS7N3Vmp0gToiKS71-HWQ_dUptLT6cVtz; XSRF-TOKEN=HB3So32veWS4D1X56-gJBFRj; WBPSESS=TlDwwucyEECKkCVNMnOgDCUsjPrxBSPv6-c3l-ry9u9-ZHBNYYmN_TRFpR7XZq9r59DJ9EF331uu4nyZDIBNpTGjjXP40N2nSgJ0MQYH2u-R8Qk6FIHoFm-sDtzMZiOQpBLhkNOeys2IK_5tVKRSsQ==; _s_tentry=weibo.com; Apache=1363728247308.7576.1652584251532; ULV=1652584251724:4:4:1:1363728247308.7576.1652584251532:1652526029346; wb_view_log_5774211588=1536*8641.25; webim_unReadCount=%7B%22time%22%3A1652584560909%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A43%2C%22msgbox%22%3A0%7D"
-            )
-            #发送请求 应答为json
-            response = request.urlopen(res)
-            print(response.getcode())  #状态码
-            res_doc = response.read()
-            res_doc = res_doc.decode('unicode_escape',
-                                     errors='replace')  #指定编码方式
-            res_doc = getData(res_doc)
-
-            #在新的应答中提取下一次翻页的url
-            si_cp_tab = getSinceID(res_doc)
-            print(si_cp_tab)
-
-            file.write(res_doc)
-            file.write(
-                "\n<!-- ******************************************************************************** -->\n"
-            )
-
-            data += res_doc
-            rnd = str(int(rnd) + 100000)
-            cnt += 1
-        file.close()
-        return data
-
-    data_ = getWholePage(2, page_index, si_cp_tab)
-    data += data_
-
-    #获取url列表
-    if (page_index == 1):
-        return data, getUrlList(data)
-
-    return data
 
 
 #构造cookie的关联数组
@@ -209,22 +131,30 @@ def text_preprocess(html):
 
 #提取每个帖子的时间、昵称、正文 TODO:评论
 def getAllData(html):
-    WB_detail_bf = BeautifulSoup(html, features="html.parser")
-    WB_detail = WB_detail_bf.find_all("div", class_="WB_detail")
+    WB_box_bf = BeautifulSoup(html, features="html.parser")
+    WB_box = WB_box_bf.find_all(
+        "div", class_="WB_cardwrap WB_feed_type S_bg2 WB_feed_like")
     nickname_list = []  #昵称
     date_list = []  #帖子的时间
     text_list = []  #正文
+    statistic_list = []  #评论数、点赞数
 
     #预处理
     def preprocess(html):
+        filter_list = ['哈工大超话', '展开全文', '展开全文c', '收起全文', '收起全文d']
         html_res = re.sub("<a.*?</a>", '', html, 0)  #去掉链接
-        html_res = html_res.replace("哈工大超话", '')
+        for i in filter_list:
+            html_res = html_res.replace(i, '')
         html_res = ''.join(x for x in html_res
                            if x.isprintable())  #去除不可打印字符如\u200b
         return html_res
 
-    for i in WB_detail:
-        WB_info_bf = BeautifulSoup(str(i))
+    for i in WB_box:
+        WB_detail_bf = BeautifulSoup(str(i))
+        WB_detail = WB_detail_bf.find_all("div", class_="WB_detail")  #正文
+        WB_handle = WB_detail_bf.find_all("div", class_="WB_handle")  #评论、点赞
+
+        WB_info_bf = BeautifulSoup(str(WB_detail))
 
         WB_info_list = WB_info_bf.find_all("div", class_="WB_info")
         WB_from_S_txt2_list = WB_info_bf.find_all("div",
@@ -237,15 +167,37 @@ def getAllData(html):
         a_nickname_list = a_nickname_bf.find_all("a")
         a_date_list = a_date_bf.find_all("a")
 
+        span_bf = BeautifulSoup(str(WB_handle))
+        span = span_bf.find_all("span", class_="line S_line1")
+        em_reg = re.compile("<em>(.+?)</em>")
+        if (len(span) >= 4):
+            list = []
+            for i in range(2, 4):
+                text = em_reg.findall(str(span[i]).replace(' ', ''))
+                if (text != NULL and text != NoneType and len(text) >= 1
+                        and text[0].isdigit()):
+                    list.append(text[0])
+                else:
+                    list.append('0')
+            statistic_list.append(list)
+
         if (len(a_nickname_list) > 0):
             nickname_list.append(a_nickname_list[0].get("nick-name"))
         if (len(a_date_list) > 0):
             date_list.append(a_date_list[0].get("title"))
         if (len(WB_text_W_f14_list) > 0):
-            text_list.append(
-                preprocess(WB_text_W_f14_list[0].text.replace(' ', '')))
+            if (len(WB_text_W_f14_list) == 1):
+                text_list.append(
+                    preprocess(WB_text_W_f14_list[0].text.replace(' ', '')))
+            else:
+                for text in WB_text_W_f14_list:
+                    if ("node-type" in text.attrs.keys()
+                            and text.get('node-type')
+                            == 'feed_list_content_full'):  #展开全文
+                        text_list.append(preprocess(text.text.replace(' ',
+                                                                      '')))
 
-    return nickname_list, date_list, text_list
+    return nickname_list, date_list, text_list, statistic_list
 
 
 #获取所有帖子正文(只提取正文)

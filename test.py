@@ -16,8 +16,8 @@ def getNextPage(html):
     return href
 
 
-file = open("test.html", "r", errors="replace", encoding='utf8')
-driver = webdriver.Edge()
-driver.get("http://localhost")
-ele = driver.find_element_by_link_text("link")
-print(ele)
+#file = open("test.html", "r", errors="replace", encoding='utf8')
+#driver = webdriver.Edge()
+#driver.get("http://localhost")
+#ele = driver.find_element_by_link_text("link")
+#print(ele)
