@@ -1,9 +1,5 @@
-2022-05-26 11:13:10 - root - INFO      - crawl.py : 92 line - Mysql Connected
-2022-05-26 11:19:22 - root - ERROR     - crawl.py : 55 line - [TencentCloudSDKException] code:FailedOperation.IllegalTextError message:Çë¼ì²éÊäÈë²ÎÊıÊÇ·ñºÏ·¨£¬ÊÇ·ñÖ»°üº¬±íÇé¡¢·ÇÖĞÓ¢×Ö·ûµÈ£¡ requestId:7ee0f57e-918f-4e52-a1b7-9243b9915586
-Traceback (most recent call last):
-  File "d:\onedrive\OneDrive - Office\Courses\´óÈıÏÂ\ĞÅÏ¢ÄÚÈİ°²È«\labs\lab\code\pycrawller\crawl.py", line 44, in LexicalAnalysis
-    resp = client.LexicalAnalysis(req)
-  File "D:\phython\lib\site-packages\tencentcloud\nlp\v20190408\nlp_client.py", line 378, in LexicalAnalysis
-    raise TencentCloudSDKException(code, message, reqid)
-tencentcloud.common.exception.tencent_cloud_sdk_exception.TencentCloudSDKException: [TencentCloudSDKException] code:FailedOperation.IllegalTextError message:Çë¼ì²éÊäÈë²ÎÊıÊÇ·ñºÏ·¨£¬ÊÇ·ñÖ»°üº¬±íÇé¡¢·ÇÖĞÓ¢×Ö·ûµÈ£¡ requestId:7ee0f57e-918f-4e52-a1b7-9243b9915586
-2022-05-26 11:19:28 - root - INFO      - crawl.py : 127 line - Íê³É¶Ô±íchaohuadata2µÄ·Ö´Ê,¹²½øĞĞÁË961´Î
+2022-05-26 12:25:35 - root - INFO      - crawl.py : 92 line - Mysql Connected
+2022-05-26 12:25:49 - root - INFO      - crawl.py : 216 line - Page:1;å¸–å­æ•°:43
+2022-05-26 12:36:41 - root - INFO      - crawl.py : 92 line - Mysql Connected
+2022-05-26 12:39:50 - root - INFO      - crawl.py : 92 line - Mysql Connected
+2022-05-26 12:39:55 - root - INFO      - crawl.py : 142 line - å®Œæˆå¯¹è¡¨chaohuadataçš„åˆ†è¯,å…±è¿›è¡Œäº†0æ¬¡,è·³è¿‡318æ¡å…ƒç»„

@@ -111,21 +111,38 @@ class crawler:
     #对正文分词
     def BuildKeywords(self, TblName):
         update_keyword_sql = "update " + TblName + " set keywords='{0}' where id={1};"
-        select_text_sql = "select id,text from " + TblName + ";"
-        res = self.cur.execute(select_text_sql)
-        id_text_list = self.cur.fetchall()
+        select_text_sql = "select id,text,mid from " + TblName + ";"
+        select_keywords_sql = "select keywords from " + TblName + " where mid='{0}'"
 
-        for i in range(1, len(id_text_list)):
-            keywords_dict = getKeywords(id_text_list[i][1])
+        try:
+            res = self.cur.execute(select_text_sql)
+            id_text_list = self.cur.fetchall()
 
-            json_str = json.dumps(keywords_dict, ensure_ascii=False)
-            res_ = self.cur.execute(
-                update_keyword_sql.format(json_str,
-                                          str(id_text_list[i][0])))  #TODO:
-            self.conn.commit()
-            print("已完成:" + str(i))
-        logging.info("完成对表" + TblName + "的分词,共进行了" + str(len(id_text_list)) +
-                     "次")
+            done_num = 0
+            have_done_num = 0
+            for i in range(1, len(id_text_list)):
+                select_res = self.cur.execute(
+                    select_keywords_sql.format(id_text_list[i][2]))
+                keywords_res = self.cur.fetchone()
+                if (select_res > 0 and keywords_res != None
+                        and len(keywords_res[0]) > 0):
+                    #已经分过词了
+                    have_done_num += 1
+                    continue
+
+                keywords_dict = getKeywords(id_text_list[i][1])
+
+                json_str = json.dumps(keywords_dict, ensure_ascii=False)
+                res_ = self.cur.execute(
+                    update_keyword_sql.format(json_str,
+                                              str(id_text_list[i][0])))
+                self.conn.commit()
+                done_num += 1
+                print("已完成:" + str(i))
+            logging.info("完成对表" + TblName + "的分词,共进行了" + str(done_num) + "次" +
+                         ",跳过" + str(have_done_num) + "条元组")
+        except Exception as e:
+            logging.exception(e)
 
     #超话爬虫
     #mode
@@ -135,6 +152,7 @@ class crawler:
         update_face_share_sql = "update " + TblName + " set face='{0}',share_num={1} where id={2};"
         update_mid_sql = "update " + TblName + " set mid='{0}' where id={1};"
         update_full_sql = "update " + TblName + " set date='{0}',nickname='{1}',comment_num={2},favour_num={3},text='{4}',face='{5}',share_num={6},mid='{7}' where id={8};"
+        query_mid_sql = "select mid from " + TblName + " where mid='{0}'"
 
         def Insert(id, date, nickname, comment_num, favour_num, text, face,
                    share_num, mid):
@@ -143,6 +161,20 @@ class crawler:
                                   text, face, share_num, mid))
             self.conn.commit()
             #log
+
+        #True:插入了新数据
+        def Update_Mode(id, date, nickname, comment_num, favour_num, text,
+                        face, share_num, mid):
+            res = self.cur.execute(query_mid_sql.format(mid))
+            if (res > 0):
+                #更新评论
+                return False
+            else:
+                Insert(id, date, nickname, comment_num, favour_num, text, face,
+                       share_num, mid)
+                self.conn.commit()
+                return True
+
         def UpdateFaceShare(id, face, share_num):
             res = self.cur.execute(
                 update_face_share_sql.format(face, share_num, id))
@@ -201,44 +233,22 @@ class crawler:
             logging.info("Page:" + str(page_num) + ";帖子数:" +
                          str(len(text_list)))
             try:
-                self.out.write("\n\n*******************  PAGE:" +
-                               str(page_num) +
-                               " *****************************\n\n")
-                self.out.write("帖子数：" + str(len(text_list)) + "\n")
-
                 for i in range(0, len(nickname_list)):
-                    self.out.write(str(i) + ".  " + date_list[i] + "\n")
-                    self.out.write(nickname_list[i] + ":" + text_list[i] +
-                                   "\n")
-                    self.out.write("转发数:" + statistic_list[i][0] + "评论数:" +
-                                   statistic_list[i][1] + " 点赞数:" +
-                                   statistic_list[i][2])
-                    self.out.write(" id:" + str(true_id) + "\n")
-                    self.out.write("FaceUrl:" + face_list[i] + "\n")
-                    self.out.write("\n")
+                    if (mode == 'insertfs'):
+                        UpdateFaceShare(str(true_id), face_list[i],
+                                        statistic_list[i][0])
+                    elif (mode == 'insertmid'):
+                        UpdateMID(str(true_id), mid_list[i])
+                    elif (mode == 'update'):
+                        res = Update_Mode(str(true_id), date_list[i],
+                                          nickname_list[i],
+                                          statistic_list[i][1],
+                                          statistic_list[i][2], text_list[i],
+                                          face_list[i], statistic_list[i][0],
+                                          mid_list[i])
+                        if (res):
+                            true_id += 1
 
-                    if (true_id > id):
-                        Insert(str(true_id), date_list[i], nickname_list[i],
-                               statistic_list[i][1], statistic_list[i][2],
-                               text_list[i], face_list[i],
-                               statistic_list[i][0], mid_list[i])
-                    else:
-                        if (mode == 'insertfs'):
-                            UpdateFaceShare(str(true_id), face_list[i],
-                                            statistic_list[i][0])
-                        elif (mode == 'insertmid'):
-                            UpdateMID(str(true_id), mid_list[i])
-                        elif (mode == 'update'):
-                            UpdateFull(str(true_id), date_list[i],
-                                       nickname_list[i], statistic_list[i][1],
-                                       statistic_list[i][2], text_list[i],
-                                       face_list[i], statistic_list[i][0],
-                                       mid_list[i])
-                    true_id += 1
-                for i in range(len(nickname_list), len(text_list)):
-                    print(i, file=self.out)
-                    print(text_list[i], file=self.out)
-                    self.out.write("\n")
             except Exception as e:
                 logging.exception(e)
 
@@ -316,7 +326,7 @@ class crawler:
             if ("html" in json_obj.keys()):
                 html_res += json_obj.get('html')
                 #print(json_obj.get('html'), file=file)
-        print(html_res, file=file)
+        #print(html_res, file=file)
         file.close()
         return html_res
 
@@ -452,6 +462,6 @@ if __name__ == "__main__":
     target_url2 = "https://weibo.com/p/100808c4afb07615e340a55ff32c5aaa8e47a5/super_index"
     Crawler = crawler()
     #Crawler.scrapy_chaohua(target_url, cookie_str,'chaohuadata', 'insertmid')
-    #Crawler.alterLogFile("test2")
-    #Crawler.scrapy_chaohua(target_url2, cookie_str, 'chaohuadata2', '')
-    #Crawler.BuildKeywords('chaohuadata2')
+    Crawler.alterLogFile("test2")
+    #Crawler.scrapy_chaohua(target_url2, cookie_str, 'chaohuadata2', 'update')#对已经存在数据库中的帖子不做处理，存储新爬到的帖子
+    #Crawler.BuildKeywords('chaohuadata')  #对新加入的帖子分词
