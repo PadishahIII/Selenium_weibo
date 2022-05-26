@@ -1,0 +1,9 @@
+2022-05-26 11:13:10 - root - INFO      - crawl.py : 92 line - Mysql Connected
+2022-05-26 11:19:22 - root - ERROR     - crawl.py : 55 line - [TencentCloudSDKException] code:FailedOperation.IllegalTextError message:请检查输入参数是否合法，是否只包含表情、非中英字符等！ requestId:7ee0f57e-918f-4e52-a1b7-9243b9915586
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 44, in LexicalAnalysis
+    resp = client.LexicalAnalysis(req)
+  File "D:\phython\lib\site-packages\tencentcloud\nlp\v20190408\nlp_client.py", line 378, in LexicalAnalysis
+    raise TencentCloudSDKException(code, message, reqid)
+tencentcloud.common.exception.tencent_cloud_sdk_exception.TencentCloudSDKException: [TencentCloudSDKException] code:FailedOperation.IllegalTextError message:请检查输入参数是否合法，是否只包含表情、非中英字符等！ requestId:7ee0f57e-918f-4e52-a1b7-9243b9915586
+2022-05-26 11:19:28 - root - INFO      - crawl.py : 127 line - 完成对表chaohuadata2的分词,共进行了961次
