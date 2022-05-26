@@ -55,6 +55,7 @@ def LexicalAnalysis(text):
         logging.exception(err)
 
 
+#对任意长度文本分词
 def getKeywords(text):
     keywords_list = dict()
     NerToken_list = []
@@ -100,7 +101,7 @@ class crawler:
         self.driver = webdriver.Edge(options=option)
 
         self.filter_list_chaohua = [
-            '哈工大超话', '哈尔滨工业大学超话', '展开全文', '展开全文c', '收起全文', '收起全文d'
+            '哈工大超话', '哈尔滨工业大学超话', '展开全文c', '展开全文', '收起全文d', '收起全文'
         ]
         self.filter_list_search = []
 
@@ -145,7 +146,7 @@ class crawler:
             logging.exception(e)
 
     #超话爬虫
-    #mode
+    #mode：update
     def scrapy_chaohua(self, target_first, cookie_str, TblName, mode):
         get_max_id_sql = "select max(id) from " + TblName + ";"
         insert_sql = "insert into " + TblName + " (id,date,nickname,comment_num,favour_num,text,face,share_num,mid)values({0},'{1}','{2}',{3},{4},'{5}','{6}',{7},'{8}');"
@@ -263,15 +264,12 @@ class crawler:
                 else:
                     break
             except Exception as e:
-                print("Exception")
-                print(e)
-                print("id:" + str(true_id))
-                print("page:" + str(page_num))
+                logging.exception(e)
                 break
 
         return
 
-    #搜索爬虫
+    #搜索爬虫 TODO
     def scrapy_search(self, cookie_str):
         get_max_id_sql = "select max(id) from SearchData;"
         insert_sql = "insert into SearchData (id,date,nickname,comment_num,favour_num,text)values({0},'{1}','{2}',{3},{4},'{5}');"
@@ -298,46 +296,6 @@ class crawler:
                 cookie_list.append(cookie)
 
         return cookie_list
-
-    #(弃用)获取下一页的url
-    def getNextPage(html):
-        loc = html.find("下一页")
-        html = html[loc - 600:loc + 100]
-        print(html)
-        html = re.sub("\s", "", html, 0)
-        rst = re.compile("<a.*?href=\"(\S+?)\"[^<]*?>下一页</a>")
-        href = rst.findall(html)
-        rst = re.compile("http[s]?://\S+(/\S+?)*")
-        if (href == NULL or len(href) == 0
-                or type(rst.match(href[0])) == NoneType):
-            return ''
-        return href[0]
-
-    #(弃用)对整页的html预处理
-    def whole_preprocess(html):
-        html_res = re.sub("<a.*?a>", '', html, 0)  #去掉链接
-        #html_res = re.sub(r"\s", '', html_res, 0)  #去掉表情
-        file = open("json.html", "w", encoding="utf8", errors="replace")
-
-        #将script中的html代码提取出来,由于不需要utf8解码,html中的双引号已经是\",可以直接json解码
-        json_list = re.findall("<script>FM.view\((.+)\);?</script>", html_res)
-        for json_str in json_list:
-            json_obj = json.loads(json_str, strict=False)
-            if ("html" in json_obj.keys()):
-                html_res += json_obj.get('html')
-                #print(json_obj.get('html'), file=file)
-        #print(html_res, file=file)
-        file.close()
-        return html_res
-
-    #截取包含正文的div
-    def text_preprocess(html):
-        rst = re.compile('<div class=.{0,4}WB_text W_f14.*?div>')  #非贪婪模式
-        result = rst.findall(html)
-        html_res = "\n".join(result)
-        html_res = html_res.replace('\\', '')
-        html_res = re.sub("<a.*?a>", '', html_res, 0)  #去掉链接
-        return html_res
 
     #预处理
     def preprocess(self, html, filter_list):
@@ -428,18 +386,9 @@ class crawler:
                     and WB_box.get('mid') != NoneType):
                 mid_list.append(WB_box.get('mid'))
             else:
-                print("***************ERROR:None mid*******************")
+                logging.error("ERROR:None mid")
 
         return nickname_list, date_list, text_list, statistic_list, face_list, mid_list
-
-    #获取所有帖子正文(只提取正文)
-    def getText(html):
-        div_bf = BeautifulSoup(html, features="html.parser")
-        div = div_bf.find_all("div", class_="WB_text W_f14")
-        list = []
-        for i in div:
-            list.append(i.text.replace(' ', ''))
-        return list
 
 
 if __name__ == "__main__":
@@ -453,8 +402,6 @@ if __name__ == "__main__":
         encoding='utf8',
         errors='replace')
 
-    file = open("test", "w", encoding="utf8", errors='replace')
-
     cookie_str = "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; ALF=1684997462; SSOLoginState=1653461466; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvsewtZLk2xOuVl2j4iORn5uzK16U6V9zaT9CnJDRKtBU.; SUB=_2A25PiaGLDeThGeNJ7FYT8S_JwzSIHXVs_pRDrDV8PUNbmtB-LWnGkW9NS7N3VjzQnmRckTAv4w_I6mvEuD6oKo8g; XSRF-TOKEN=xHuC381rGgFVG5x4HQB6kHqL; _s_tentry=weibo.com; Apache=7682961489905.312.1653461481403; ULV=1653461481602:7:7:3:7682961489905.312.1653461481403:1653385987133; wb_view_log_5774211588=1536*8641.25; WBPSESS=TlDwwucyEECKkCVNMnOgDCUsjPrxBSPv6-c3l-ry9u9-ZHBNYYmN_TRFpR7XZq9ruRLMs4Ikp4qjr8I_Em1omLVGMFb8LgbnSJz_lYqUmMrkwj-OV9wcv_9BVHDoO1FHMm33E-AlB5hZNEBSx-wRHQ==; webim_unReadCount=%7B%22time%22%3A1653474579408%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A44%2C%22msgbox%22%3A0%7D; PC_TOKEN=9834886566"
     #'哈工大'超话
     target_url = "https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?sudaref=weibo.com"
@@ -462,6 +409,6 @@ if __name__ == "__main__":
     target_url2 = "https://weibo.com/p/100808c4afb07615e340a55ff32c5aaa8e47a5/super_index"
     Crawler = crawler()
     #Crawler.scrapy_chaohua(target_url, cookie_str,'chaohuadata', 'insertmid')
-    Crawler.alterLogFile("test2")
+    #Crawler.alterLogFile("test2")
     #Crawler.scrapy_chaohua(target_url2, cookie_str, 'chaohuadata2', 'update')#对已经存在数据库中的帖子不做处理，存储新爬到的帖子
     #Crawler.BuildKeywords('chaohuadata')  #对新加入的帖子分词
