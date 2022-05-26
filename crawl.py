@@ -1,5 +1,5 @@
-from codecs import utf_16_be_decode
 import json
+from numpy import insert
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
@@ -19,6 +19,8 @@ import time
 from types import NoneType
 import pymysql
 import logging
+import datetime
+import dateutil.relativedelta
 
 
 #长度要小于500字,utf8格式
@@ -57,6 +59,8 @@ def LexicalAnalysis(text):
 
 #对任意长度文本分词
 def getKeywords(text):
+    if (text == NULL or text == None or len(text) < 1):
+        return dict()
     keywords_list = dict()
     NerToken_list = []
     PosToken_list = []  #分词及词性
@@ -69,7 +73,7 @@ def getKeywords(text):
                 NerToken_list.extend(nl)
                 PosToken_list.extend(pl)
         for word_obj in PosToken_list:
-            if (word_obj['Pos'] != 'n'):
+            if (word_obj['Pos'] != 'n' or len(word_obj['Word']) < 2):
                 continue
             if (word_obj['Word'] in keywords_list.keys()):
                 keywords_list[word_obj['Word']] = keywords_list.get(
@@ -109,8 +113,120 @@ class crawler:
         self.out.close()
         self.out = open(filepath, "w", encoding="utf8", errors="replace")
 
+    #统计关键词频率
+    #mode :update 重置
+    def BuildKeywordsStatistic(self, TblName, start_time_str, end_time_str,
+                               months, mode):
+        get_max_id_sql = "select max(id) from keywords_statistic;"
+        get_keywords_sql = "select keywords from " + TblName + " where date between '{0}' and '{1}';"
+        query_keywords_sql = "select id from keywords_statistic where start_date between '{0}' and '{1}';"
+        insert_keywords_sql = "insert into keywords_statistic (id,start_date,end_date,keywords_frequency)values({0},'{1}','{2}','{3}');"
+        update_keywords_frequency_sql = "update keywords_statistic set keywords_frequency='{0}' where id={1};"
+        get_keywords_frequency_sql = "select keywords_frequency from keywords_statistic where id={0};"
+        update_mode_sql = "update keywords_statistic set keywords_frequency='{}' where true;"
+
+        if (mode == 'update'):
+            res_update_mode = self.cur.execute(update_mode_sql)
+
+        update_cnt = 0  #更新的元组个数
+        insert_cnt = 0  #新建的元组个数
+        #try:
+        #获取下一个id
+        res_id = self.cur.execute(get_max_id_sql)
+        id_list = self.cur.fetchone()
+        id = 0
+        if (res_id <= 0 or id_list == None or len(id_list) <= 0
+                or id_list[0] == None):
+            id = 0
+        else:
+            id = int(id_list[0])
+        next_id = id + 1
+
+        #start_time_str = "2019-01-01"
+        #end_time_str = "2022-04-01"
+        time_obj = datetime.datetime.strptime(start_time_str, "%Y-%m-%d")
+        delta = dateutil.relativedelta.relativedelta(months=months)
+        while (time.mktime(time_obj.timetuple()) <= time.mktime(
+                time.strptime(end_time_str, "%Y-%m-%d"))):
+            #try:
+            #月底
+            endOfMonth = time_obj + delta - datetime.timedelta(days=1)
+            res_get_keywords = self.cur.execute(
+                get_keywords_sql.format(str(time_obj), str(endOfMonth)))
+            keywords_list = self.cur.fetchall()  #需要统计的元组
+            logging.info(
+                "SQL:" +
+                get_keywords_sql.format(str(time_obj), str(endOfMonth)))
+            if (res_get_keywords > 0 and keywords_list != None
+                    and len(keywords_list) > 0):
+                exec_id = 0  #要更新的频率元组的id
+                #查询该时间段的统计元组是否已经建立
+                res_query_keywords = self.cur.execute(
+                    query_keywords_sql.format(str(time_obj), str(endOfMonth)))
+                if (res_query_keywords <= 0):
+                    #建立元组
+                    res_insert = self.cur.execute(
+                        insert_keywords_sql.format(
+                            str(next_id), time_obj.strftime("%Y-%m-%d"),
+                            endOfMonth.strftime("%Y-%m-%d"), '{}'))
+                    self.conn.commit()
+                    exec_id = next_id  #在新元组上更新
+                    next_id += 1
+                    insert_cnt += 1
+                else:
+                    query_keywords_list = self.cur.fetchone()
+                    if (query_keywords_list != None):
+                        exec_id = query_keywords_list[0]  #在已有的元组上更新
+                        update_cnt += 1
+
+                #取出之前的统计结果
+                res_get_keywords_frequency = self.cur.execute(
+                    get_keywords_frequency_sql.format(str(exec_id)))
+                get_keywords_frequency_list = self.cur.fetchone()
+                keywords_frequency_obj = NULL  #待更新的频率元组
+                if (get_keywords_frequency_list != None):
+                    keywords_frequency_str = get_keywords_frequency_list[0]
+                    try:
+                        keywords_frequency_obj = json.loads(
+                            keywords_frequency_str)
+                    except Exception as e:
+                        logging.error("Invaild DB data:'" +
+                                      keywords_frequency_str + "' id=" +
+                                      str(exec_id))
+                        logging.exception(e)
+
+                #更新
+                for i in range(0, len(keywords_list)):
+                    for keywords_str in keywords_list[i]:
+                        keywords_obj = json.loads(keywords_str)
+                        if (keywords_obj == None):
+                            continue
+                        for key in keywords_obj.keys():
+                            if (key in keywords_frequency_obj.keys()):
+                                keywords_frequency_obj[key] += keywords_obj[
+                                    key]
+                            else:
+                                keywords_frequency_obj[key] = keywords_obj[key]
+                #写回数据库
+                res_update_keywords_frequency_sql = self.cur.execute(
+                    update_keywords_frequency_sql.format(
+                        json.dumps(keywords_frequency_obj, ensure_ascii=False),
+                        str(exec_id)))
+                self.conn.commit()
+
+                #时间增长
+            time_obj = time_obj + delta
+        logging.info("统计关键词频率,更新元组个数:" + str(update_cnt) + ",新建元组个数:" +
+                     str(insert_cnt) + ",时间区间:" + start_time_str + " to " +
+                     end_time_str)
+        #except Exception as e:
+        #    logging.exception(e)
+        #except Exception as e:
+        #    logging.exception(e)
+
     #对正文分词
-    def BuildKeywords(self, TblName):
+    #mode:update 重新分词
+    def BuildKeywords(self, TblName, mode):
         update_keyword_sql = "update " + TblName + " set keywords='{0}' where id={1};"
         select_text_sql = "select id,text,mid from " + TblName + ";"
         select_keywords_sql = "select keywords from " + TblName + " where mid='{0}'"
@@ -125,8 +241,8 @@ class crawler:
                 select_res = self.cur.execute(
                     select_keywords_sql.format(id_text_list[i][2]))
                 keywords_res = self.cur.fetchone()
-                if (select_res > 0 and keywords_res != None
-                        and len(keywords_res[0]) > 0):
+                if (mode != 'update' and select_res > 0
+                        and keywords_res != None and len(keywords_res[0]) > 0):
                     #已经分过词了
                     have_done_num += 1
                     continue
@@ -167,7 +283,9 @@ class crawler:
         def Update_Mode(id, date, nickname, comment_num, favour_num, text,
                         face, share_num, mid):
             res = self.cur.execute(query_mid_sql.format(mid))
-            if (res > 0):
+            res_list = self.cur.fetchall()
+            if (res > 0 and res_list != None and len(res_list) > 0
+                    and res_list[0] != None):
                 #更新评论
                 return False
             else:
@@ -203,8 +321,13 @@ class crawler:
 
         self.driver.maximize_window()
 
-        self.cur.execute(get_max_id_sql)
-        id = self.cur.fetchone()[0] + 1
+        res_id = self.cur.execute(get_max_id_sql)
+        id_list = self.cur.fetchone()
+        if (res_id <= 0 or id_list == None or len(id_list) <= 0
+                or id_list[0] == None):
+            id = 1
+        else:
+            id = id_list[0] + 1
         true_id = 2  #id=1是测试元组
         page_num = 1
         while (page_num < 2):
@@ -411,4 +534,9 @@ if __name__ == "__main__":
     #Crawler.scrapy_chaohua(target_url, cookie_str,'chaohuadata', 'insertmid')
     #Crawler.alterLogFile("test2")
     #Crawler.scrapy_chaohua(target_url2, cookie_str, 'chaohuadata2', 'update')#对已经存在数据库中的帖子不做处理，存储新爬到的帖子
-    #Crawler.BuildKeywords('chaohuadata')  #对新加入的帖子分词
+    #Crawler.BuildKeywords('chaohuadata', 'update')  #对新加入的帖子分词
+    #Crawler.BuildKeywords('chaohuadata2', 'update')
+    Crawler.BuildKeywordsStatistic('chaohuadata', '2019-07-01', '2022-04-01',
+                                   1)
+    Crawler.BuildKeywordsStatistic('chaohuadata2', '2019-07-01', '2022-04-01',
+                                   1)

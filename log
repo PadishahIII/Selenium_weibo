@@ -1,5 +1,498 @@
-2022-05-26 12:25:35 - root - INFO      - crawl.py : 92 line - Mysql Connected
-2022-05-26 12:25:49 - root - INFO      - crawl.py : 216 line - Page:1;帖子数:43
-2022-05-26 12:36:41 - root - INFO      - crawl.py : 92 line - Mysql Connected
-2022-05-26 12:39:50 - root - INFO      - crawl.py : 92 line - Mysql Connected
-2022-05-26 12:39:55 - root - INFO      - crawl.py : 142 line - 完成对表chaohuadata的分词,共进行了0次,跳过318条元组
+2022-05-26 15:12:12 - root - INFO      - crawl.py : 95 line - Mysql Connected
+2022-05-26 15:12:13 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:12:13 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=2
+2022-05-26 15:12:13 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:12:13 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:15:32 - root - INFO      - crawl.py : 95 line - Mysql Connected
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=2
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=3
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=4
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=5
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=6
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=7
+2022-05-26 15:15:33 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 15:15:34 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=8
+2022-05-26 15:15:34 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 15:15:34 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=9
+2022-05-26 15:15:34 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 15:15:34 - root - INFO      - crawl.py : 196 line - 建立keywords_statistic统计元组:id=10
+2022-05-26 15:15:34 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 15:16:09 - root - INFO      - crawl.py : 95 line - Mysql Connected
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=2
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=3
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=4
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=5
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=6
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=7
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=8
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=9
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 197 line - 建立keywords_statistic统计元组:id=10
+2022-05-26 15:16:10 - root - INFO      - crawl.py : 147 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 15:19:10 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=2
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=3
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=4
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=5
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=6
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=7
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=8
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=9
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=10
+2022-05-26 15:19:11 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 15:19:12 - root - INFO      - crawl.py : 199 line - 建立keywords_statistic统计元组:id=11
+2022-05-26 15:19:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 15:21:47 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=2
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=3
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=4
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=5
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=6
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=7
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=8
+2022-05-26 15:21:48 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 15:21:49 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=9
+2022-05-26 15:21:49 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 15:21:49 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=10
+2022-05-26 15:21:49 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 15:21:49 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=11
+2022-05-26 15:21:49 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 15:21:49 - root - ERROR     - crawl.py : 183 line - Invaild DB data:'aa' id=1
+2022-05-26 15:21:49 - root - ERROR     - crawl.py : 186 line - Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 180, in BuildKeywordsStatistic
+    keywords_frequency_obj = json.loads(
+  File "D:\phython\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\phython\lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\phython\lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2022-05-26 15:24:11 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=2
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=3
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=4
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=5
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=6
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=7
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=8
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=9
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=10
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=11
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=1
+2022-05-26 15:24:12 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=12
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=13
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=14
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=15
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=16
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=17
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=18
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=19
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=20
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=21
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=22
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=23
+2022-05-26 15:24:13 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 15:24:14 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=24
+2022-05-26 15:24:14 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 15:24:14 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=25
+2022-05-26 15:24:14 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 15:24:14 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=26
+2022-05-26 15:24:14 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 15:24:14 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=27
+2022-05-26 15:27:03 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=2
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=3
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=4
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=5
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=6
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=7
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=8
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=9
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=10
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=11
+2022-05-26 15:27:04 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=28
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=12
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=13
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=14
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=15
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=16
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=17
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=18
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=19
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=20
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=21
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=22
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=23
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=24
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=25
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=26
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 15:27:05 - root - INFO      - crawl.py : 206 line - 建立keywords_statistic统计元组:id=27
+2022-05-26 15:28:43 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 15:28:44 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:28:44 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:28:44 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:28:44 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 15:28:44 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 15:28:44 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 15:28:44 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 15:28:45 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 15:28:46 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 15:28:46 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 15:28:46 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 15:28:46 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 15:28:46 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 15:28:46 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 15:28:46 - root - INFO      - crawl.py : 149 line - SQL:select keywords from chaohuadata2 where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 15:37:10 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 15:38:22 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 15:38:23 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:38:23 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 15:38:24 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 15:38:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 15:38:26 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 15:38:26 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 15:38:26 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 15:38:26 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 15:38:26 - root - INFO      - crawl.py : 214 line - 统计关键词频率,更新元组个数:0,新建元组个数:28,时间区间:2019-07-01 to 2022-04-01
+2022-05-26 15:50:57 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 15:53:12 - root - INFO      - crawl.py : 254 line - 完成对表chaohuadata的分词,共进行了318次,跳过0条元组
+2022-05-26 15:59:24 - root - ERROR     - crawl.py : 57 line - [TencentCloudSDKException] code:FailedOperation.IllegalTextError message:请检查输入参数是否合法，是否只包含表情、非中英字符等！ requestId:3bd1d478-d3a3-4d66-9899-2037c99fd3c3
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 46, in LexicalAnalysis
+    resp = client.LexicalAnalysis(req)
+  File "D:\phython\lib\site-packages\tencentcloud\nlp\v20190408\nlp_client.py", line 378, in LexicalAnalysis
+    raise TencentCloudSDKException(code, message, reqid)
+tencentcloud.common.exception.tencent_cloud_sdk_exception.TencentCloudSDKException: [TencentCloudSDKException] code:FailedOperation.IllegalTextError message:请检查输入参数是否合法，是否只包含表情、非中英字符等！ requestId:3bd1d478-d3a3-4d66-9899-2037c99fd3c3
+2022-05-26 15:59:30 - root - INFO      - crawl.py : 254 line - 完成对表chaohuadata2的分词,共进行了960次,跳过0条元组
+2022-05-26 15:59:30 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 15:59:30 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 15:59:30 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 16:04:23 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 16:04:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 16:04:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 16:04:25 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 16:05:44 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 16:05:46 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 214 line - 统计关键词频率,更新元组个数:25,新建元组个数:2,时间区间:2019-07-01 to 2022-04-01
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 16:05:47 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 16:05:48 - root - INFO      - crawl.py : 214 line - 统计关键词频率,更新元组个数:28,新建元组个数:0,时间区间:2019-07-01 to 2022-04-01
+2022-05-26 16:07:59 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 16:08:01 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 16:08:01 - root - ERROR     - crawl.py : 188 line - Invaild DB data:'' id=29
+2022-05-26 16:08:01 - root - ERROR     - crawl.py : 191 line - Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 185, in BuildKeywordsStatistic
+    keywords_frequency_obj = json.loads(
+  File "D:\phython\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\phython\lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\phython\lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2022-05-26 16:08:53 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 16:08:54 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 214 line - 统计关键词频率,更新元组个数:27,新建元组个数:0,时间区间:2019-07-01 to 2022-04-01
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 16:08:55 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 16:08:56 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 16:08:57 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 16:08:57 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 16:08:57 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 16:08:57 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 16:08:57 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 16:08:57 - root - INFO      - crawl.py : 214 line - 统计关键词频率,更新元组个数:28,新建元组个数:0,时间区间:2019-07-01 to 2022-04-01
