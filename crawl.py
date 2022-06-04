@@ -1,5 +1,3 @@
-import json
-from numpy import insert
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
@@ -11,7 +9,6 @@ import selenium
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import urllib.request as request
-import json
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from pymysql import NULL
@@ -21,6 +18,117 @@ import pymysql
 import logging
 import datetime
 import dateutil.relativedelta
+
+
+#不超过200字
+def SentimentAnalysis(text):
+    try:
+        cred = credential.Credential("AKIDc5kHYZJ9k47uQgfNozuZx5xZv5yZuymJ",
+                                     "HH2WjgNnxqTqwmCQN3SbT4ORDiwGK7ds")
+        httpProfile = HttpProfile()
+        httpProfile.endpoint = "nlp.tencentcloudapi.com"
+
+        clientProfile = ClientProfile()
+        clientProfile.httpProfile = httpProfile
+        client = nlp_client.NlpClient(cred, "ap-guangzhou", clientProfile)
+
+        req = models.SentimentAnalysisRequest()
+        params = {"Text": text, "Mode": "2class"}
+        req.from_json_string(json.dumps(params))
+
+        resp = client.SentimentAnalysis(req)
+        obj = json.loads(resp.to_json_string())
+
+        return obj['Sentiment'], obj['Positive'], obj['Negative']
+
+    except TencentCloudSDKException as err:
+        print(err)
+
+
+#   情感分析：
+#    1 非常积极 高于0.7
+#    2 比较积极 高于0.55
+#    3 喜忧参半 0.45-0.55
+#    4 比较消极
+#    5 超级消极
+
+
+def getSentimentResult(text):
+    if (text == NULL or text == None or len(text) < 1):
+        return -1
+    positive_list = []
+    negative_list = []
+    num = 0
+    step = 200
+    try:
+        if (len(text) <= step):
+            sentiment, positive, negative = SentimentAnalysis(text)
+            positive_list.append(positive)
+            negative_list.append(negative)
+            num += 1
+        else:
+            for i in range(0, len(text) - step + 1, step):
+                sentiment, positive, negative = SentimentAnalysis(
+                    text[i:min(i + step,
+                               len(text) - 1)])
+                positive_list.append(positive)
+                negative_list.append(negative)
+                num += 1
+        positive_sum = 0
+        negative_sum = 0
+        for i in range(0, num):
+            positive_sum += positive_list[i]
+            negative_sum += negative_list[i]
+        positive_avg = positive_sum / num
+        negative_avg = negative_sum / num
+        standard = [0.55, 0.7]
+        if (positive_avg >= 0.5):
+            if (positive_avg <= standard[0]):
+                return 3
+            if (positive_avg <= standard[1]):
+                return 2
+            else:
+                return 1
+        else:
+            if (negative_avg <= standard[0]):
+                return 3
+            if (negative_avg <= standard[1]):
+                return 4
+            else:
+                return 5
+    except Exception as e:
+        print(e)
+
+
+#提取关键词
+#text不超过10000个字符
+def getTopic(text):
+    if (text == None or len(text) <= 0):
+        return None
+    try:
+        cred = credential.Credential("AKIDc5kHYZJ9k47uQgfNozuZx5xZv5yZuymJ",
+                                     "HH2WjgNnxqTqwmCQN3SbT4ORDiwGK7ds")
+        httpProfile = HttpProfile()
+        httpProfile.endpoint = "nlp.tencentcloudapi.com"
+
+        clientProfile = ClientProfile()
+        clientProfile.httpProfile = httpProfile
+        client = nlp_client.NlpClient(cred, "ap-guangzhou", clientProfile)
+
+        req = models.KeywordsExtractionRequest()
+        params = {"Text": text}
+        req.from_json_string(json.dumps(params))
+
+        resp = client.KeywordsExtraction(req)
+
+        word_list = list()
+        json_obj = json.loads(resp.to_json_string())
+        for obj in json_obj.get('Keywords'):
+            word_list.append(obj['Word'])
+        return word_list
+
+    except TencentCloudSDKException as err:
+        print(err)
 
 
 #长度要小于500字,utf8格式
@@ -87,7 +195,8 @@ def getKeywords(text):
 
 class crawler:
 
-    def __init__(self):
+    #WEBDRIVER:True开启浏览器
+    def __init__(self, WEBDRIVER):
         #数据库连接
         self.conn = pymysql.connect(host='localhost',
                                     user='root',
@@ -98,11 +207,12 @@ class crawler:
         self.cur = self.conn.cursor()
         self.out = open("test", "w", encoding="utf8", errors='replace')
 
-        #初始化WebDriver
-        option = webdriver.EdgeOptions()
-        option.add_argument("headless")
-        #option.add_argument("Accept-Charset:utf-8")
-        self.driver = webdriver.Edge(options=option)
+        if (WEBDRIVER):
+            #初始化WebDriver
+            option = webdriver.EdgeOptions()
+            option.add_argument("headless")
+            #option.add_argument("Accept-Charset:utf-8")
+            self.driver = webdriver.Edge(options=option)
 
         self.filter_list_chaohua = [
             '哈工大超话', '哈尔滨工业大学超话', '展开全文c', '展开全文', '收起全文d', '收起全文'
@@ -112,6 +222,269 @@ class crawler:
     def alterLogFile(self, filepath):
         self.out.close()
         self.out = open(filepath, "w", encoding="utf8", errors="replace")
+
+    def BuildSentiment(self, TblName, mode):
+        update_sql = "update " + TblName + " set sentiment={0} where id={1};"
+        select_text_sql = "select id,text from " + TblName + ";"
+        select_senti_sql = "select sentiment from " + TblName + " where id={0};"
+
+        try:
+            res = self.cur.execute(select_text_sql)
+            id_text_list = self.cur.fetchall()
+
+            done_num = 0
+            have_done_num = 0
+            for i in range(0, len(id_text_list)):
+                select_res = self.cur.execute(
+                    select_senti_sql.format(str(id_text_list[i][0])))
+                topic_res = self.cur.fetchone()
+                if (mode != 'update' and select_res > 0 and topic_res != None
+                        and topic_res[0] != None and len(topic_res[0]) > 0):
+                    #已经做过情感分析了
+                    have_done_num += 1
+                    continue
+
+                sentiment = getSentimentResult(id_text_list[i][1])
+                if (sentiment == None or sentiment <= 0):
+                    logging.error(
+                        "Error code 2 when build sentiment:Invaild text")
+                    continue
+
+                res_ = self.cur.execute(
+                    update_sql.format(str(sentiment), str(id_text_list[i][0])))
+                self.conn.commit()
+                done_num += 1
+                print("已完成:" + str(i))
+            logging.info("完成对表" + TblName + "的情感分析,共进行了" + str(done_num) +
+                         "次" + ",跳过" + str(have_done_num) + "条元组")
+        except Exception as e:
+            logging.exception(e)
+
+    #对正文提取出关键词
+    def BuildTopic(self, TblName, mode):
+        update_topic_sql = "update " + TblName + " set topic='{0}' where id={1};"
+        select_text_sql = "select id,text,mid from " + TblName + ";"
+        select_topic_sql = "select topic from " + TblName + " where mid='{0}'"
+
+        try:
+            res = self.cur.execute(select_text_sql)
+            id_text_list = self.cur.fetchall()
+
+            done_num = 0
+            have_done_num = 0
+            for i in range(0, len(id_text_list)):
+                select_res = self.cur.execute(
+                    select_topic_sql.format(id_text_list[i][2]))
+                topic_res = self.cur.fetchone()
+                if (mode != 'update' and select_res > 0 and topic_res != None
+                        and topic_res[0] != None and len(topic_res[0]) > 0):
+                    #已经分过词了
+                    have_done_num += 1
+                    continue
+
+                topic_list = getTopic(id_text_list[i][1])
+                if (topic_list == None):
+                    continue
+
+                topic_str = ','.join(topic_list)
+                res_ = self.cur.execute(
+                    update_topic_sql.format(topic_str,
+                                            str(id_text_list[i][0])))
+                self.conn.commit()
+                done_num += 1
+                print("已完成:" + str(i))
+            logging.info("完成对表" + TblName + "的话题关键词提取,共进行了" + str(done_num) +
+                         "次" + ",跳过" + str(have_done_num) + "条元组")
+        except Exception as e:
+            logging.exception(e)
+
+    #维护话题关键词与微博mid之间的关系
+    def BuildTopicList(self, mode):
+        get_mid_topic_sql = "select mid,topic from alldata;"
+        query_topic_sql = "select topic from topic_list where topic='{0}';"
+        get_mid_list_sql = "select mid_list from topic_list where topic='{0}';"
+        insert_topic_sql = "insert into topic_list (topic,mid_list) values ('{0}',\"{1}\");"
+        update_topic_sql = "update topic_list set mid_list=\"{0}\" where topic='{1}';"
+        update_mode_sql = "update topic_list set mid_list='' where true;"
+
+        def Insert(topic, mid_list):
+            mid_list = mid_list.replace('\"', "'")  #统一单双引号
+            res = self.cur.execute(insert_topic_sql.format(topic, mid_list))
+            self.conn.commit()
+
+        def Update(topic, mid_list):
+            mid_list = mid_list.replace('\"', "'")
+            res = self.cur.execute(update_topic_sql.format(mid_list, topic))
+            self.conn.commit()
+
+        def GetMidListCount(topic):
+            res = self.cur.execute(get_mid_list_sql.format(topic))
+            midlist_list = self.cur.fetchone()
+            midlist_str = midlist_list[0]
+            if (len(midlist_str) <= 0):
+                mid_list = []
+            else:
+                mid_list = midlist_str.split(',')
+            return mid_list
+
+        if (mode == 'update'):
+            res_update_mode = self.cur.execute(update_mode_sql)
+
+        update_cnt = 0  #更新的关键词
+        insert_cnt = 0  #新建的关键词
+        text_cnt = 0  #处理的帖子数
+        topic_cnt = 0  #处理的关键词数
+
+        res_mid_topic = self.cur.execute(get_mid_topic_sql)
+        mid_topic_list = self.cur.fetchall()
+        if (res_mid_topic <= 0 or mid_topic_list == None
+                or len(mid_topic_list) <= 0 or mid_topic_list[0] == None):
+            logging.error("None result when fetch keywords,SQL:" +
+                          get_mid_topic_sql)
+            return
+        for mid_keywords in mid_topic_list:
+            text_cnt += 1
+            topic_str = mid_keywords[1]
+            mid = mid_keywords[0]
+
+            if (topic_str == None or mid == None or len(topic_str) <= 0
+                    or len(mid) <= 0):
+                continue
+
+            topic_list = topic_str.split(',')
+            if (topic_list == None):
+                continue
+            for topic in topic_list:
+                if (topic == ''):
+                    continue
+                topic_cnt += 1
+                print(topic_cnt)
+                res_query_keyword = self.cur.execute(
+                    query_topic_sql.format(topic))
+                if (res_query_keyword <= 0):
+                    #新建关键词
+                    mid_list = list()
+                    mid_list.append(mid)
+                    midlist_str = ','.join(mid_list)
+                    Insert(topic, midlist_str)
+                    insert_cnt += 1
+                else:
+                    #更新mid list 和频次
+                    mid_list = GetMidListCount(topic)
+                    if (mid_list == None):
+                        logging.error(
+                            "Error code 1 when fetch mid_list, mid=" + mid)
+                        continue
+                    if (mid in mid_list):
+                        pass
+                    else:
+                        mid_list.append(mid)
+                        midlist_str = ','.join(mid_list)
+                        Update(topic, midlist_str)
+                        update_cnt += 1
+        logging.info("记录一次topic_list的维护,更新了" + str(update_cnt) + "条关键词元组," +
+                     "新建" + str(insert_cnt) + "条关键词元组," + "共处理" +
+                     str(text_cnt) + "条帖子的" + str(topic_cnt) + "个关键词")
+        return
+
+    #维护 关键词与mid_list之间的映射 只考虑正文，不包含评论
+    def BuildKeywordsList(self, mode):
+        get_mid_keywords_sql = "select mid,keywords from alldata;"
+        query_keyword_sql = "select keyword from keywords_list where keyword='{0}';"
+        get_mid_list_count_sql = "select mid_list,count from keywords_list where keyword='{0}';"
+        insert_keyword_sql = "insert into keywords_list (keyword,mid_list,count) values ('{0}',\"{1}\",{2});"
+        update_keyword_sql = "update keywords_list set mid_list=\"{0}\",count={1} where keyword='{2}';"
+        update_mode_sql = "update keywords_list set mid_list='' where true;"
+
+        def Insert(keyword, mid_list, count):
+            mid_list = mid_list.replace('\"', "'")  #统一单双引号
+            res = self.cur.execute(
+                insert_keyword_sql.format(keyword, mid_list, str(count)))
+            self.conn.commit()
+
+        def Update(keyword, mid_list, count):
+            mid_list = mid_list.replace('\"', "'")
+            res = self.cur.execute(
+                update_keyword_sql.format(mid_list, str(count), keyword))
+            self.conn.commit()
+
+        def GetMidListCount(keyword):
+            res = self.cur.execute(get_mid_list_count_sql.format(keyword))
+            midlist_count_list = self.cur.fetchone()
+            if (res <= 0 or midlist_count_list == None
+                    or len(midlist_count_list) <= 0
+                    or midlist_count_list[0] == None):
+                return None, None
+            else:
+                mid_list_str = midlist_count_list[0]  #TODO:
+                count = midlist_count_list[1]
+                if (len(mid_list_str) <= 0):
+                    mid_list = []
+                else:
+                    mid_list = mid_list_str.split(',')
+                return mid_list, count
+
+        if (mode == 'update'):
+            res_update_mode = self.cur.execute(update_mode_sql)
+
+        update_cnt = 0  #更新的关键词
+        insert_cnt = 0  #新建的关键词
+        text_cnt = 0  #处理的帖子数
+        keyword_cnt = 0  #处理的关键词数
+
+        res_mid_keywords = self.cur.execute(get_mid_keywords_sql)
+        mid_keywords_list = self.cur.fetchall()
+        if (res_mid_keywords <= 0 or mid_keywords_list == None
+                or len(mid_keywords_list) <= 0
+                or mid_keywords_list[0] == None):
+            logging.error("None result when fetch keywords,SQL:" +
+                          get_mid_keywords_sql)
+            return
+        for mid_keywords in mid_keywords_list:
+            text_cnt += 1
+            keywords_str = mid_keywords[1]
+            mid = mid_keywords[0]
+
+            if (keywords_str == None or mid == None or len(keywords_str) <= 0
+                    or len(mid) <= 0):
+                continue
+
+            keywords_obj = json.loads(keywords_str)
+            if (keywords_obj == None):
+                continue
+            for keyword in keywords_obj.keys():
+                keyword_cnt += 1
+                print(keyword_cnt)
+                res_query_keyword = self.cur.execute(
+                    query_keyword_sql.format(keyword))
+                if (res_query_keyword <= 0):
+                    #新建关键词
+                    mid_list = list()
+                    mid_list.append(mid)
+                    mid_list_str = ','.join(mid_list)
+                    count = keywords_obj.get(keyword)
+                    Insert(keyword, mid_list_str, count)
+                    insert_cnt += 1
+                else:
+                    #更新mid list 和频次
+                    mid_list, count = GetMidListCount(keyword)
+                    if (mid_list == None or count == None):
+                        logging.error(
+                            "Error code 0 when fetch mid_list and count, mid="
+                            + mid)
+                        continue
+                    if (mid in mid_list):
+                        pass
+                    else:
+                        mid_list.append(mid)
+                        mid_list_str = ','.join(mid_list)
+                        count += keywords_obj.get(keyword)
+                        Update(keyword, mid_list_str, count)
+                        update_cnt += 1
+        logging.info("记录一次keywords_list的维护,更新了" + str(update_cnt) + "条关键词元组," +
+                     "新建" + str(insert_cnt) + "条关键词元组," + "共处理" +
+                     str(text_cnt) + "条帖子的" + str(keyword_cnt) + "个关键词")
+        return
 
     #统计关键词频率
     #mode :update 重置
@@ -194,7 +567,6 @@ class crawler:
                                       keywords_frequency_str + "' id=" +
                                       str(exec_id))
                         logging.exception(e)
-
                 #更新
                 for i in range(0, len(keywords_list)):
                     for keywords_str in keywords_list[i]:
@@ -224,8 +596,17 @@ class crawler:
         #except Exception as e:
         #    logging.exception(e)
 
-    #对正文分词
-    #mode:update 重新分词
+
+#    def BuildCommentsKeywords(self, TblName, mode):
+#        update_keyword_sql = "update " + TblName + " set keywords='{0}' where id='{1}';"
+#        select_text_sql = "select id,text from " + TblName + ";"
+#        select_keywords_sql = "select keywords from " + TblName + " where id='{0}'"
+#
+#        res = self.cur.execute(select_text_sql)  #TODO:
+
+#对正文分词
+#mode:update 重新分词
+
     def BuildKeywords(self, TblName, mode):
         update_keyword_sql = "update " + TblName + " set keywords='{0}' where id={1};"
         select_text_sql = "select id,text,mid from " + TblName + ";"
@@ -260,6 +641,72 @@ class crawler:
                          ",跳过" + str(have_done_num) + "条元组")
         except Exception as e:
             logging.exception(e)
+
+    #评论爬虫
+    def scrapy_comments(self, target_base, TblName, mode):
+        get_all_mid_sql = "select mid from alldata;"
+        insert_comment_sql = "insert into " + TblName + " (id,mid,text,username,face)values('{0}','{1}','{2}','{3}','{4}');"
+        query_id_sql = "select id from " + TblName + " where id='{0}'"
+        update_sql = "update " + TblName + " set text='{0}',username='{1}',face='{2}' where id='{3}';"
+
+        def Insert(id, mid, text, username, face):
+            res = self.cur.execute(
+                insert_comment_sql.format(id, mid, text, username, face))
+            self.conn.commit()
+
+        def Update_Flush(id, mid, text, username, face):
+            res = self.cur.execute(query_id_sql.format(id))
+            res_list = self.cur.fetchall()
+            if (res > 0 and res_list != None and len(res_list) > 0
+                    and res_list[0] != None):
+                if (mode == 'flush'):
+                    flush_res = self.cur.execute(
+                        update_sql.format(text, username, face, id))
+                    self.conn.commit()
+                    return True
+                return False
+            else:
+                Insert(id, mid, text, username, face)
+                return True
+
+        def request_comment(mid):
+            res = request.Request(target_base.format(mid))
+            response = request.urlopen(res)
+            res_doc = response.read()
+            data_str = res_doc.decode('utf8', 'ignore')
+            data_obj = json.loads(data_str)
+            if (data_obj != None and 'comments' in data_obj.keys()):
+                logging.info("Request comment of " + mid + ", response code " +
+                             str(response.getcode()) + ", counts: " +
+                             str(len(data_obj['comments'])))
+                return data_obj
+            else:
+                logging.error("Failed to request comment of " + mid +
+                              ", response data:" + "\n\t\t\t" + data_str)
+                return None
+
+        comments_num = 0
+        res_mid = self.cur.execute(get_all_mid_sql)
+        mid_list = self.cur.fetchall()
+        if (res_mid <= 0 or mid_list == None or len(mid_list) <= 0
+                or mid_list[0] == None):
+            logging.error("None mid list when execute SQL " + get_all_mid_sql)
+            return
+        for mid in mid_list:
+            data_obj = request_comment(mid[0])
+            comments_num += len(data_obj['comments'])
+            for arr in data_obj['comments']:
+                text = arr['text']
+                id = arr['idstr']
+                username = arr['user']['name']
+                face = arr['user']['profile_image_url']
+
+                text = self.preprocess_comments(text)
+                Update_Flush(id, mid[0], text, username, face)
+                print("comment_num:" + str(comments_num))
+            time.sleep(10)
+
+        logging.info("共更新" + str(comments_num) + "条评论")
 
     #超话爬虫
     #mode：update
@@ -328,7 +775,8 @@ class crawler:
             id = 1
         else:
             id = id_list[0] + 1
-        true_id = 2  #id=1是测试元组
+        true_id = id  #id=1是测试元组
+        text_cnt = 0  #新加入的帖子数
         page_num = 1
         while (page_num < 2):
             for i in range(10):  #滚动若干次
@@ -372,6 +820,7 @@ class crawler:
                                           mid_list[i])
                         if (res):
                             true_id += 1
+                            text_cnt += 1
 
             except Exception as e:
                 logging.exception(e)
@@ -390,6 +839,8 @@ class crawler:
                 logging.exception(e)
                 break
 
+        logging.info("记录对" + target_first + "的一次爬取，新加入" + str(text_cnt) +
+                     "条帖子")
         return
 
     #搜索爬虫 TODO
@@ -419,6 +870,11 @@ class crawler:
                 cookie_list.append(cookie)
 
         return cookie_list
+
+    def preprocess_comments(self, data):
+        data_res = re.sub("^回复@.*?:", '', data, 0)
+        data_res = ''.join(x for x in data_res if x.isprintable())
+        return data_res
 
     #预处理
     def preprocess(self, html, filter_list):
@@ -513,7 +969,6 @@ class crawler:
 
         return nickname_list, date_list, text_list, statistic_list, face_list, mid_list
 
-
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.INFO,
@@ -525,18 +980,28 @@ if __name__ == "__main__":
         encoding='utf8',
         errors='replace')
 
-    cookie_str = "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; ALF=1684997462; SSOLoginState=1653461466; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvsewtZLk2xOuVl2j4iORn5uzK16U6V9zaT9CnJDRKtBU.; SUB=_2A25PiaGLDeThGeNJ7FYT8S_JwzSIHXVs_pRDrDV8PUNbmtB-LWnGkW9NS7N3VjzQnmRckTAv4w_I6mvEuD6oKo8g; XSRF-TOKEN=xHuC381rGgFVG5x4HQB6kHqL; _s_tentry=weibo.com; Apache=7682961489905.312.1653461481403; ULV=1653461481602:7:7:3:7682961489905.312.1653461481403:1653385987133; wb_view_log_5774211588=1536*8641.25; WBPSESS=TlDwwucyEECKkCVNMnOgDCUsjPrxBSPv6-c3l-ry9u9-ZHBNYYmN_TRFpR7XZq9ruRLMs4Ikp4qjr8I_Em1omLVGMFb8LgbnSJz_lYqUmMrkwj-OV9wcv_9BVHDoO1FHMm33E-AlB5hZNEBSx-wRHQ==; webim_unReadCount=%7B%22time%22%3A1653474579408%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A44%2C%22msgbox%22%3A0%7D; PC_TOKEN=9834886566"
-    #'哈工大'超话
-    target_url = "https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?sudaref=weibo.com"
-    #'哈尔滨工业大学'超话
-    target_url2 = "https://weibo.com/p/100808c4afb07615e340a55ff32c5aaa8e47a5/super_index"
-    Crawler = crawler()
-    #Crawler.scrapy_chaohua(target_url, cookie_str,'chaohuadata', 'insertmid')
-    #Crawler.alterLogFile("test2")
-    #Crawler.scrapy_chaohua(target_url2, cookie_str, 'chaohuadata2', 'update')#对已经存在数据库中的帖子不做处理，存储新爬到的帖子
-    #Crawler.BuildKeywords('chaohuadata', 'update')  #对新加入的帖子分词
-    #Crawler.BuildKeywords('chaohuadata2', 'update')
-    Crawler.BuildKeywordsStatistic('chaohuadata', '2019-07-01', '2022-04-01',
-                                   1)
-    Crawler.BuildKeywordsStatistic('chaohuadata2', '2019-07-01', '2022-04-01',
-                                   1)
+    #cookie_str = "SINAGLOBAL=2012260830470.789.1652279835753; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFTCEhVX8PyDSbzM9fNdvH85JpX5KMhUgL.Fo-NS0BEeK2f1hn2dJLoIEBLxKqLBozL1K5LxKnL12BLB.eLxK-LBo5L12qLxK-L1hqLBoMt; PC_TOKEN=f537443d32; ALF=1685856098; SSOLoginState=1654320100; SCF=AtLJ0ZM7dPtydutgQFGH2sx9Z-clxSbtt5worLTD6UKvXYgodzu67s0wCwcTdX5dOi_-v1Gib6jG20PXrpVY6ec.; SUB=_2A25Pnpu1DeThGeNJ7FYT8S_JwzSIHXVs7Yp9rDV8PUNbmtANLWfkkW9NS7N3VgQYhOr5UmYz5OTXJY5oLBVUxfAa; XSRF-TOKEN=0Bu_X36L91O6uHXgZm5vAuyI; WBPSESS=TlDwwucyEECKkCVNMnOgDCUsjPrxBSPv6-c3l-ry9u9-ZHBNYYmN_TRFpR7XZq9r59DJ9EF331uu4nyZDIBNpecJqT6NhB98cGGECFxtPGw4mLEzUVLEqX8QfPptJ902BC_3GlFqnVX7IxhbVre5CA==; _s_tentry=weibo.com; Apache=4228646352087.906.1654320113866; ULV=1654320113941:10:2:2:4228646352087.906.1654320113866:1654167086306; wb_view_log_5774211588=1536*8641.25; webim_unReadCount=%7B%22time%22%3A1654320122166%2C%22dm_pub_total%22%3A23%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A0%2C%22allcountNum%22%3A47%2C%22msgbox%22%3A0%7D"
+    ##'哈工大'超话
+    #target_url = "https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?sudaref=weibo.com"
+    ##'哈尔滨工业大学'超话
+    #target_url2 = "https://weibo.com/p/100808c4afb07615e340a55ff32c5aaa8e47a5/super_index"
+    Crawler = crawler(None)
+    ##Crawler.scrapy_chaohua(target_url, cookie_str,'chaohuadata', 'insertmid')
+    ##Crawler.alterLogFile("test2")
+    #Crawler.scrapy_chaohua(target_url, cookie_str, 'chaohuadata',
+    #                       'update')  #对已经存在数据库中的帖子不做处理，存储新爬到的帖子
+    #Crawler.BuildKeywords('chaohuadata', '')  #对新加入的帖子分词
+    ##Crawler.BuildKeywords('chaohuadata2', 'update')
+    #Crawler.BuildTopic('chaohuadata', '')
+    #Crawler.BuildTopic('chaohuadata2', '')
+
+    #Crawler.BuildKeywordsStatistic('chaohuadata', '2019-07-01', '2022-04-01',
+    #                               1, '')
+    #Crawler.BuildKeywordsStatistic('chaohuadata2', '2019-07-01', '2022-04-01',
+    #                               1, '')
+    #target_base = "https://api.weibo.com/2/comments/show.json?access_token=2.00yMAmSG0NzCoG7969bfecd0mHIdlC&id={0}"
+    #Crawler.scrapy_comments(target_base, 'comments', 'update')
+    #Crawler.BuildKeywordsList('')
+    #Crawler.BuildTopicList('')
+    #Crawler.BuildSentiment('chaohuadata', '')
+    Crawler.BuildSentiment('chaohuadata2', '')

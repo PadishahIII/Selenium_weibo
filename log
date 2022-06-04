@@ -496,3 +496,376 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2022-05-26 16:08:57 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
 2022-05-26 16:08:57 - root - INFO      - crawl.py : 152 line - SQL:select keywords from chaohuadata2 where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
 2022-05-26 16:08:57 - root - INFO      - crawl.py : 214 line - 统计关键词频率,更新元组个数:28,新建元组个数:0,时间区间:2019-07-01 to 2022-04-01
+2022-05-26 17:25:48 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 17:26:08 - root - INFO      - crawl.py : 358 line - Page:1;帖子数:39
+2022-05-26 17:26:08 - root - ERROR     - crawl.py : 379 line - (1062, "Duplicate entry '3' for key 'PRIMARY'")
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 368, in scrapy_chaohua
+    res = Update_Mode(str(true_id), date_list[i],
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 292, in Update_Mode
+    Insert(id, date, nickname, comment_num, favour_num, text, face,
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 276, in Insert
+    res = self.cur.execute(
+  File "D:\phython\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\phython\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\phython\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\phython\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\phython\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\phython\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\phython\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\phython\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '3' for key 'PRIMARY'")
+2022-05-26 17:26:29 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 17:26:47 - root - INFO      - crawl.py : 358 line - Page:1;帖子数:39
+2022-05-26 17:26:47 - root - ERROR     - crawl.py : 379 line - (1062, "Duplicate entry '2' for key 'PRIMARY'")
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 368, in scrapy_chaohua
+    res = Update_Mode(str(true_id), date_list[i],
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 292, in Update_Mode
+    Insert(id, date, nickname, comment_num, favour_num, text, face,
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 276, in Insert
+    res = self.cur.execute(
+  File "D:\phython\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "D:\phython\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "D:\phython\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\phython\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "D:\phython\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "D:\phython\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "D:\phython\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\phython\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '2' for key 'PRIMARY'")
+2022-05-26 17:26:49 - root - INFO      - crawl.py : 395 line - 新加入0条帖子
+2022-05-26 17:28:58 - root - INFO      - crawl.py : 259 line - 完成对表chaohuadata的分词,共进行了319次,跳过0条元组
+2022-05-26 17:32:07 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 17:32:25 - root - INFO      - crawl.py : 358 line - Page:1;帖子数:39
+2022-05-26 17:35:31 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 17:35:49 - root - INFO      - crawl.py : 358 line - Page:1;帖子数:39
+2022-05-26 17:35:57 - root - INFO      - crawl.py : 395 line - 记录对https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?sudaref=weibo.com的一次爬取，新加入1条帖子
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 259 line - 完成对表chaohuadata的分词,共进行了320次,跳过0条元组
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 17:38:03 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 219 line - 统计关键词频率,更新元组个数:27,新建元组个数:0,时间区间:2019-07-01 to 2022-04-01
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 17:38:04 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 17:38:05 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 17:38:06 - root - INFO      - crawl.py : 219 line - 统计关键词频率,更新元组个数:28,新建元组个数:0,时间区间:2019-07-01 to 2022-04-01
+2022-05-26 17:39:23 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-05-26 17:39:41 - root - INFO      - crawl.py : 358 line - Page:1;帖子数:39
+2022-05-26 17:39:43 - root - INFO      - crawl.py : 395 line - 记录对https://weibo.com/p/100808ec2f8f02483cbf2206505d27f9ffb3c1/super_index?sudaref=weibo.com的一次爬取，新加入0条帖子
+2022-05-26 17:39:43 - root - INFO      - crawl.py : 259 line - 完成对表chaohuadata的分词,共进行了0次,跳过320条元组
+2022-05-26 17:39:43 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 17:39:43 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 17:39:43 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 17:39:43 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 17:39:44 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 219 line - 统计关键词频率,更新元组个数:27,新建元组个数:0,时间区间:2019-07-01 to 2022-04-01
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-07-01 00:00:00' and '2019-07-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-08-01 00:00:00' and '2019-08-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-09-01 00:00:00' and '2019-09-30 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-10-01 00:00:00' and '2019-10-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-11-01 00:00:00' and '2019-11-30 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2019-12-01 00:00:00' and '2019-12-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-01-01 00:00:00' and '2020-01-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-02-01 00:00:00' and '2020-02-29 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-03-01 00:00:00' and '2020-03-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-04-01 00:00:00' and '2020-04-30 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-05-01 00:00:00' and '2020-05-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-06-01 00:00:00' and '2020-06-30 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-07-01 00:00:00' and '2020-07-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-08-01 00:00:00' and '2020-08-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-09-01 00:00:00' and '2020-09-30 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-10-01 00:00:00' and '2020-10-31 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-11-01 00:00:00' and '2020-11-30 00:00:00';
+2022-05-26 17:39:45 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2020-12-01 00:00:00' and '2020-12-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-01-01 00:00:00' and '2021-01-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-02-01 00:00:00' and '2021-02-28 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-03-01 00:00:00' and '2021-03-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-04-01 00:00:00' and '2021-04-30 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-05-01 00:00:00' and '2021-05-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-06-01 00:00:00' and '2021-06-30 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-07-01 00:00:00' and '2021-07-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-08-01 00:00:00' and '2021-08-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-09-01 00:00:00' and '2021-09-30 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-10-01 00:00:00' and '2021-10-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-11-01 00:00:00' and '2021-11-30 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2021-12-01 00:00:00' and '2021-12-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2022-01-01 00:00:00' and '2022-01-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2022-02-01 00:00:00' and '2022-02-28 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2022-03-01 00:00:00' and '2022-03-31 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 157 line - SQL:select keywords from chaohuadata2 where date between '2022-04-01 00:00:00' and '2022-04-30 00:00:00';
+2022-05-26 17:39:46 - root - INFO      - crawl.py : 219 line - 统计关键词频率,更新元组个数:28,新建元组个数:0,时间区间:2019-07-01 to 2022-04-01
+2022-06-04 14:03:18 - root - INFO      - crawl.py : 97 line - Mysql Connected
+2022-06-04 14:05:11 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:06:44 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:06:59 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:09:13 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:10:13 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:10:41 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 14:11:37 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:11:37 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 14:11:37 - root - INFO      - crawl.py : 299 line - Request comment of 4761732520611140, response code 200, counts: 1
+2022-06-04 14:11:38 - root - INFO      - crawl.py : 299 line - Request comment of 4772051028282826, response code 200, counts: 0
+2022-06-04 14:11:38 - root - INFO      - crawl.py : 299 line - Request comment of 4771352512824930, response code 200, counts: 0
+2022-06-04 14:11:39 - root - INFO      - crawl.py : 299 line - Request comment of 4770154871524376, response code 200, counts: 0
+2022-06-04 14:11:39 - root - INFO      - crawl.py : 299 line - Request comment of 4769827971663630, response code 200, counts: 0
+2022-06-04 14:11:39 - root - INFO      - crawl.py : 299 line - Request comment of 4759939391947114, response code 200, counts: 2
+2022-06-04 14:11:40 - root - INFO      - crawl.py : 299 line - Request comment of 4769515378577806, response code 200, counts: 0
+2022-06-04 14:11:40 - root - INFO      - crawl.py : 299 line - Request comment of 4757394469159537, response code 200, counts: 1
+2022-06-04 14:11:41 - root - INFO      - crawl.py : 299 line - Request comment of 4764421844894473, response code 200, counts: 1
+2022-06-04 14:11:42 - root - INFO      - crawl.py : 299 line - Request comment of 4768452546138370, response code 200, counts: 3
+2022-06-04 14:11:43 - root - INFO      - crawl.py : 299 line - Request comment of 4768434833853186, response code 200, counts: 0
+2022-06-04 14:11:43 - root - INFO      - crawl.py : 299 line - Request comment of 4762265704206860, response code 200, counts: 5
+2022-06-04 14:13:43 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:13:43 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 14:15:37 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:15:38 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 14:15:47 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:15:47 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 14:15:48 - root - INFO      - crawl.py : 299 line - Request comment of 4761732520611140, response code 200, counts: 1
+2022-06-04 14:15:48 - root - INFO      - crawl.py : 299 line - Request comment of 4772051028282826, response code 200, counts: 0
+2022-06-04 14:15:48 - root - INFO      - crawl.py : 299 line - Request comment of 4771352512824930, response code 200, counts: 0
+2022-06-04 14:15:48 - root - INFO      - crawl.py : 299 line - Request comment of 4770154871524376, response code 200, counts: 0
+2022-06-04 14:15:49 - root - INFO      - crawl.py : 299 line - Request comment of 4769827971663630, response code 200, counts: 0
+2022-06-04 14:15:50 - root - INFO      - crawl.py : 299 line - Request comment of 4759939391947114, response code 200, counts: 2
+2022-06-04 14:15:51 - root - INFO      - crawl.py : 299 line - Request comment of 4769515378577806, response code 200, counts: 0
+2022-06-04 14:15:52 - root - INFO      - crawl.py : 299 line - Request comment of 4757394469159537, response code 200, counts: 1
+2022-06-04 14:15:52 - root - INFO      - crawl.py : 299 line - Request comment of 4764421844894473, response code 200, counts: 1
+2022-06-04 14:15:53 - root - INFO      - crawl.py : 299 line - Request comment of 4768452546138370, response code 200, counts: 3
+2022-06-04 14:15:53 - root - INFO      - crawl.py : 299 line - Request comment of 4768434833853186, response code 200, counts: 0
+2022-06-04 14:15:55 - root - INFO      - crawl.py : 299 line - Request comment of 4762265704206860, response code 200, counts: 5
+2022-06-04 14:48:23 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:48:24 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 14:48:29 - root - INFO      - crawl.py : 299 line - Request comment of 4761732520611140, response code 200, counts: 1
+2022-06-04 14:48:29 - root - INFO      - crawl.py : 299 line - Request comment of 4772051028282826, response code 200, counts: 0
+2022-06-04 14:48:30 - root - INFO      - crawl.py : 299 line - Request comment of 4771352512824930, response code 200, counts: 0
+2022-06-04 14:48:30 - root - INFO      - crawl.py : 299 line - Request comment of 4770154871524376, response code 200, counts: 0
+2022-06-04 14:48:30 - root - INFO      - crawl.py : 299 line - Request comment of 4769827971663630, response code 200, counts: 0
+2022-06-04 14:48:30 - root - INFO      - crawl.py : 299 line - Request comment of 4759939391947114, response code 200, counts: 2
+2022-06-04 14:48:31 - root - INFO      - crawl.py : 299 line - Request comment of 4769515378577806, response code 200, counts: 0
+2022-06-04 14:48:31 - root - INFO      - crawl.py : 299 line - Request comment of 4757394469159537, response code 200, counts: 1
+2022-06-04 14:48:31 - root - INFO      - crawl.py : 299 line - Request comment of 4764421844894473, response code 200, counts: 1
+2022-06-04 14:48:31 - root - INFO      - crawl.py : 299 line - Request comment of 4768452546138370, response code 200, counts: 3
+2022-06-04 14:48:32 - root - INFO      - crawl.py : 299 line - Request comment of 4768434833853186, response code 200, counts: 0
+2022-06-04 14:48:32 - root - INFO      - crawl.py : 299 line - Request comment of 4762265704206860, response code 200, counts: 5
+2022-06-04 14:54:07 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 14:54:07 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 14:54:08 - root - INFO      - crawl.py : 299 line - Request comment of 4761732520611140, response code 200, counts: 1
+2022-06-04 14:54:08 - root - INFO      - crawl.py : 299 line - Request comment of 4772051028282826, response code 200, counts: 0
+2022-06-04 14:54:08 - root - INFO      - crawl.py : 299 line - Request comment of 4771352512824930, response code 200, counts: 0
+2022-06-04 14:54:08 - root - INFO      - crawl.py : 299 line - Request comment of 4770154871524376, response code 200, counts: 0
+2022-06-04 14:54:09 - root - INFO      - crawl.py : 299 line - Request comment of 4769827971663630, response code 200, counts: 0
+2022-06-04 14:54:09 - root - INFO      - crawl.py : 299 line - Request comment of 4759939391947114, response code 200, counts: 2
+2022-06-04 14:54:09 - root - INFO      - crawl.py : 299 line - Request comment of 4769515378577806, response code 200, counts: 0
+2022-06-04 14:54:09 - root - INFO      - crawl.py : 299 line - Request comment of 4757394469159537, response code 200, counts: 1
+2022-06-04 14:54:10 - root - INFO      - crawl.py : 299 line - Request comment of 4764421844894473, response code 200, counts: 1
+2022-06-04 14:54:10 - root - INFO      - crawl.py : 299 line - Request comment of 4768452546138370, response code 200, counts: 3
+2022-06-04 14:54:10 - root - INFO      - crawl.py : 299 line - Request comment of 4768434833853186, response code 200, counts: 0
+2022-06-04 14:54:10 - root - INFO      - crawl.py : 299 line - Request comment of 4762265704206860, response code 200, counts: 5
+2022-06-04 14:55:20 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 15:01:09 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 15:01:10 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 15:01:10 - root - INFO      - crawl.py : 299 line - Request comment of 4761732520611140, response code 200, counts: 1
+2022-06-04 15:01:10 - root - INFO      - crawl.py : 299 line - Request comment of 4772051028282826, response code 200, counts: 0
+2022-06-04 15:01:10 - root - INFO      - crawl.py : 299 line - Request comment of 4771352512824930, response code 200, counts: 0
+2022-06-04 15:01:11 - root - INFO      - crawl.py : 299 line - Request comment of 4770154871524376, response code 200, counts: 0
+2022-06-04 15:01:11 - root - INFO      - crawl.py : 299 line - Request comment of 4769827971663630, response code 200, counts: 0
+2022-06-04 15:01:11 - root - INFO      - crawl.py : 299 line - Request comment of 4759939391947114, response code 200, counts: 2
+2022-06-04 15:01:11 - root - INFO      - crawl.py : 299 line - Request comment of 4769515378577806, response code 200, counts: 0
+2022-06-04 15:01:11 - root - INFO      - crawl.py : 299 line - Request comment of 4757394469159537, response code 200, counts: 1
+2022-06-04 15:01:12 - root - INFO      - crawl.py : 299 line - Request comment of 4764421844894473, response code 200, counts: 1
+2022-06-04 15:01:12 - root - INFO      - crawl.py : 299 line - Request comment of 4768452546138370, response code 200, counts: 3
+2022-06-04 15:01:12 - root - INFO      - crawl.py : 299 line - Request comment of 4768434833853186, response code 200, counts: 0
+2022-06-04 15:01:12 - root - INFO      - crawl.py : 299 line - Request comment of 4762265704206860, response code 200, counts: 5
+2022-06-04 15:17:58 - root - INFO      - crawl.py : 98 line - Mysql Connected
+2022-06-04 15:17:58 - root - INFO      - crawl.py : 299 line - Request comment of 4773164322392978, response code 200, counts: 1
+2022-06-04 15:17:58 - root - INFO      - crawl.py : 299 line - Request comment of 4761732520611140, response code 200, counts: 1
+2022-06-04 15:17:59 - root - INFO      - crawl.py : 299 line - Request comment of 4772051028282826, response code 200, counts: 0
+2022-06-04 15:17:59 - root - INFO      - crawl.py : 299 line - Request comment of 4771352512824930, response code 200, counts: 0
+2022-06-04 15:17:59 - root - INFO      - crawl.py : 299 line - Request comment of 4770154871524376, response code 200, counts: 0
+2022-06-04 15:18:01 - root - INFO      - crawl.py : 299 line - Request comment of 4769827971663630, response code 200, counts: 0
+2022-06-04 15:18:01 - root - INFO      - crawl.py : 299 line - Request comment of 4759939391947114, response code 200, counts: 2
+2022-06-04 15:18:01 - root - INFO      - crawl.py : 299 line - Request comment of 4769515378577806, response code 200, counts: 0
+2022-06-04 15:18:02 - root - INFO      - crawl.py : 299 line - Request comment of 4757394469159537, response code 200, counts: 1
+2022-06-04 15:18:02 - root - INFO      - crawl.py : 299 line - Request comment of 4764421844894473, response code 200, counts: 1
+2022-06-04 15:18:02 - root - INFO      - crawl.py : 299 line - Request comment of 4768452546138370, response code 200, counts: 3
+2022-06-04 15:18:03 - root - INFO      - crawl.py : 299 line - Request comment of 4768434833853186, response code 200, counts: 0
+2022-06-04 15:18:03 - root - INFO      - crawl.py : 299 line - Request comment of 4762265704206860, response code 200, counts: 5
+2022-06-04 15:18:04 - root - INFO      - crawl.py : 299 line - Request comment of 4767555804463845, response code 200, counts: 0
+2022-06-04 15:18:04 - root - INFO      - crawl.py : 299 line - Request comment of 4766601251652748, response code 200, counts: 0
+2022-06-04 15:18:04 - root - INFO      - crawl.py : 299 line - Request comment of 4760150583542493, response code 200, counts: 1
+2022-06-04 15:18:05 - root - INFO      - crawl.py : 299 line - Request comment of 4766015421153442, response code 200, counts: 0
+2022-06-04 15:18:05 - root - INFO      - crawl.py : 299 line - Request comment of 4758258525667572, response code 200, counts: 1
+2022-06-04 15:18:05 - root - INFO      - crawl.py : 299 line - Request comment of 4763380893618122, response code 200, counts: 0
+2022-06-04 15:18:06 - root - INFO      - crawl.py : 299 line - Request comment of 4763359062788539, response code 200, counts: 0
+2022-06-04 15:18:06 - root - INFO      - crawl.py : 299 line - Request comment of 4762886486625697, response code 200, counts: 0
+2022-06-04 15:18:06 - root - INFO      - crawl.py : 299 line - Request comment of 4762812381924966, response code 200, counts: 0
+2022-06-04 15:18:06 - root - INFO      - crawl.py : 299 line - Request comment of 4762526174676777, response code 200, counts: 0
+2022-06-04 15:18:07 - root - INFO      - crawl.py : 299 line - Request comment of 4758972831105504, response code 200, counts: 0
+2022-06-04 15:18:07 - root - INFO      - crawl.py : 299 line - Request comment of 4758151133397805, response code 200, counts: 2
+2022-06-04 15:18:07 - root - INFO      - crawl.py : 299 line - Request comment of 4761085306210761, response code 200, counts: 0
+2022-06-04 16:22:23 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:23:06 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:25:23 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:27:05 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:35:57 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:42:17 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:43:15 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:43:30 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:48:27 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:48:53 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:52:12 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:57:22 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 16:59:03 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 17:03:36 - root - INFO      - crawl.py : 100 line - Mysql Connected
+2022-06-04 17:05:05 - root - INFO      - crawl.py : 214 line - 记录一次keywords_list的维护,更新了1551条关键词元组,新建167条关键词元组,共处理1281条帖子的6485个关键词
+2022-06-04 17:54:45 - root - INFO      - crawl.py : 124 line - Mysql Connected
+2022-06-04 17:54:45 - root - ERROR     - crawl.py : 178 line - object of type 'NoneType' has no len()
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 161, in BuildTopic
+    and len(topic_res[0]) > 0):
+TypeError: object of type 'NoneType' has no len()
+2022-06-04 17:54:45 - root - ERROR     - crawl.py : 178 line - object of type 'NoneType' has no len()
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 161, in BuildTopic
+    and len(topic_res[0]) > 0):
+TypeError: object of type 'NoneType' has no len()
+2022-06-04 17:56:18 - root - INFO      - crawl.py : 124 line - Mysql Connected
+2022-06-04 17:57:11 - root - INFO      - crawl.py : 124 line - Mysql Connected
+2022-06-04 17:57:52 - root - ERROR     - crawl.py : 178 line - can only join an iterable
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 168, in BuildTopic
+    topic_str = ','.join(topic_list)
+TypeError: can only join an iterable
+2022-06-04 18:03:03 - root - INFO      - crawl.py : 175 line - 完成对表chaohuadata2的话题关键词提取,共进行了960次,跳过0条元组
+2022-06-04 18:07:40 - root - INFO      - crawl.py : 124 line - Mysql Connected
+2022-06-04 18:07:40 - root - ERROR     - crawl.py : 178 line - can only join an iterable
+Traceback (most recent call last):
+  File "d:\onedrive\OneDrive - Office\Courses\大三下\信息内容安全\labs\lab\code\pycrawller\crawl.py", line 168, in BuildTopic
+    topic_str = ','.join(topic_list)
+TypeError: can only join an iterable
+2022-06-04 18:08:03 - root - INFO      - crawl.py : 124 line - Mysql Connected
+2022-06-04 18:10:08 - root - INFO      - crawl.py : 126 line - Mysql Connected
+2022-06-04 18:11:15 - root - INFO      - crawl.py : 179 line - 完成对表chaohuadata的话题关键词提取,共进行了200次,跳过115条元组
+2022-06-04 18:24:06 - root - INFO      - crawl.py : 126 line - Mysql Connected
+2022-06-04 18:25:27 - root - INFO      - crawl.py : 126 line - Mysql Connected
+2022-06-04 18:26:00 - root - INFO      - crawl.py : 126 line - Mysql Connected
+2022-06-04 18:26:39 - root - INFO      - crawl.py : 126 line - Mysql Connected
+2022-06-04 18:27:07 - root - INFO      - crawl.py : 126 line - Mysql Connected
+2022-06-04 18:27:49 - root - INFO      - crawl.py : 126 line - Mysql Connected
+2022-06-04 18:31:52 - root - INFO      - crawl.py : 268 line - 记录一次topic_list的维护,更新了4041条关键词元组,新建1157条关键词元组,共处理1281条帖子的5221个关键词
+2022-06-04 19:12:18 - root - INFO      - crawl.py : 206 line - Mysql Connected
+2022-06-04 19:13:02 - root - ERROR     - crawl.py : 249 line - Error code 2 when build sentiment:Invaild text
+2022-06-04 19:14:17 - root - ERROR     - crawl.py : 249 line - Error code 2 when build sentiment:Invaild text
+2022-06-04 19:14:17 - root - ERROR     - crawl.py : 249 line - Error code 2 when build sentiment:Invaild text
+2022-06-04 19:14:17 - root - ERROR     - crawl.py : 249 line - Error code 2 when build sentiment:Invaild text
+2022-06-04 19:14:27 - root - INFO      - crawl.py : 258 line - 完成对表chaohuadata的情感分析,共进行了316次,跳过0条元组
+2022-06-04 19:15:50 - root - INFO      - crawl.py : 206 line - Mysql Connected
+2022-06-04 19:21:35 - root - INFO      - crawl.py : 258 line - 完成对表chaohuadata2的情感分析,共进行了961次,跳过0条元组
